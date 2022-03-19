@@ -23,6 +23,9 @@ session_start();
 // Constante URL contenant l'url absolue racine du projet
 define('URL', 'http://localhost/PHP/room/');
 
-// Constante ROOT_PATH (chemin racine du serveur, sur xampp : C:/xampp/htdocs (utilisée pour l'enregistrement photo sur gestion_produit.php))
+// Constante ROOT_PATH (chemin racine du serveur, sur xampp : C:/xampp/htdocs (utilisée pour l'enregistrement photo sur gestion_salles.php))
 // Cette information s'adapte naturellement au serveur, nous n'aurons jamais besoin de la changer
-//define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
+define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
+
+// Constante ROOT_SITE (chemin racine du projet depuis la racine serveur (utilisée pour l'enregistrement photo sur gestion_salles.php))
+define('ROOT_SITE', '/PHP/room/');
