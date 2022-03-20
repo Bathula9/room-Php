@@ -59,7 +59,8 @@ include 'inc/nav.inc.php';
                         <li class="list-group-item">Nom: <?= $_SESSION['membre']['nom']; ?></li>
                         <li class="list-group-item">Prenom: <?= $_SESSION['membre']['prenom']; ?></li>
                         <li class="list-group-item">Email: <?= $_SESSION['membre']['email']; ?></li>
-                        <li class="list-group-item">Sexe: <?= $_SESSION['membre']['sexe']; ?></li>
+                        <li class="list-group-item">Sexe: <?= $sexe; ?></li>
+                        <li class="list-group-item">Statut: <?= $statut; ?></li>
 
                     </ul>
                 </div>

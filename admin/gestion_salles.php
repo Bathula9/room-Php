@@ -9,6 +9,36 @@ if (!user_is_admin()) {
     exit(); // permet de bloquer le code php de la page (dans le cas ou qq'un passerait des informations get dans l'url)
 }
 
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+// Suppression produit
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && !empty($_GET['id_salle'])) {
+
+    // on va chercher en bdd les infos de ce produit afin de connaitre la photo qui doit être supprimée
+    $recup_photo = $pdo->prepare("SELECT * FROM salle WHERE id_salle = :id_salle");
+    $recup_photo->bindParam(':id_salle', $_GET['id_salle'], PDO::PARAM_STR);
+    $recup_photo->execute();
+
+    if ($recup_photo->rowCount() > 0) {
+        $infos = $recup_photo->fetch(PDO::FETCH_ASSOC);
+        $chemin_photo = ROOT_PATH . ROOT_SITE . 'assets/img_produit/' . $infos['photo'];
+        if (!empty($infos['photo']) && file_exists($chemin_photo)) {
+            //unlink() permet de supprimer un fichier sur le serveur
+            unlink($chemin_photo);
+        }
+    }
+
+    $suppression = $pdo->prepare("DELETE FROM salle WHERE id_salle = :id_salle");
+    $suppression->bindParam(':id_salle', $_GET['id_salle'], PDO::PARAM_STR);
+    $suppression->execute();
+    $msg .= '<div class="alert alert-success mb-3">Le produit n°' . $_GET['id_salle'] . ' a bien été supprimé.</div>';
+}
+
+$id_salle = ''; // utilisé pour la modif
+
+
 $titre = '';
 $description = '';
 $pays = '';
@@ -19,6 +49,32 @@ $capacite = '';
 $categorie = '';
 $photo = '';
 
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+// Modification produit
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+if (isset($_GET['action']) && $_GET['action'] == 'modifier' && !empty($_GET['id_salle'])) {
+    $recup_salle = $pdo->prepare("SELECT * FROM salle WHERE id_salle = :id_salle");
+    $recup_salle->bindParam(':id_salle', $_GET['id_salle'], PDO::PARAM_STR);
+    $recup_salle->execute();
+
+    if ($recup_salle->rowCount() > 0) {
+        $infos_salle = $recup_salle->fetch(PDO::FETCH_ASSOC);
+
+        $id_salle = $infos_salle['id_salle']; // utilisée pour la modif
+
+        $titre = $infos_salle['titre'];
+        $description = $infos_salle['description'];
+        $photo_actuelle = $infos_salle['photo']; // utilisée pour conserver l'ancienne photo pour la modif
+        $pays = $infos_salle['pays'];
+        $ville = $infos_salle['ville'];
+        $adresse = $infos_salle['adresse'];
+        $cp = $infos_salle['cp'];
+        $categorie = $infos_salle['capacite'];
+        $categorie = $infos_salle['categorie'];
+    }
+}
 
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
@@ -40,22 +96,39 @@ if (isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['pays
     $categorie = trim($_POST['categorie']);
 
 
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($_POST);
+    // echo '</pre>';
 
     $erreur = false;
+
+    // Pour la modification :
+    // récupération de l'id_salle et de la photo actuelle
+    if (!empty($_POST['id_salle'])) {
+        $id_salle = $_POST['id_salle'];
+    }
+    if (!empty($_POST['photo_actuelle'])) {
+        $photo = $_POST['photo_actuelle'];
+    }
 
     //vérification disponibilité référence :
     $verif_titre = $pdo->prepare("SELECT * FROM salle WHERE titre = :titre");
     $verif_titre->bindParam(':titre', $titre, PDO::PARAM_STR);
     $verif_titre->execute();
-    //on vérifie si on a récupéré une ligne que si l'id_produit est vide (si l'id_produit n'est pas vide, c'est une modif et la référence existe déjà)
+    //on vérifie si on a récupéré une ligne que si l'id_salle est vide (si l'id_salle n'est pas vide, c'est une modif et le titre existe déjà)
     if ($verif_titre->rowCount() > 0 && empty($id_salle)) {
         $msg .= '<div class="alert alert-danger mb-3">Attention,<br>titre indisponible.</div>';
         //cas d'erreur 
         $erreur = true;
     }
+
+    // Si capacite est vide, on affecte 0 pour éviter une erreur sql
+    if (empty($capacite) || !is_numeric($capacite)) {
+        $_SESSION['message_utilisateur'] .= '<div class="alert alert-warning mb-3">Attention,<br>le capacite a été affecté à 0.</div>';
+        $capacite = 0;
+    }
+
+
 
     // Contrôles sur la photo
     // Superglobale pour les pièces jointes d'un formulaire : $_FILES (obligatoire de mettre l'attribut enctype="" sur le form)
@@ -87,6 +160,23 @@ if (isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['pays
             // cas d'erreur 
             $erreur = true;
         }
+    }
+
+    if (!$erreur) {
+
+        // si l'id_salle est vide : INSERT INTO sinon : UPDATE
+        if (!empty($id_salle)) {
+            // Modification du salle 
+            $enregistrement = $pdo->prepare("UPDATE salle SET titre = :titre, description = :description, photo = :photo, pays = :pays , ville = :ville,adresse = :adresse,cp = :cp,capacite = :capacite, categorie = :categorie WHERE id_salle = :id_salle");
+            $enregistrement->bindParam(':id_salle', $id_salle, PDO::PARAM_STR);
+
+            // on crée un message dans la session pour confirmation la modif:
+            $_SESSION['message_utilisateur'] .= '<div class="alert alert-success mb-3">Le produit n°' . $id_salle . ' a bien été modifié.</div>';
+        } else {
+            // Enregistrement du salle 
+            $enregistrement = $pdo->prepare("INSERT INTO salle (id_salle, titre, description, photo, pays, ville, adresse, cp, capacite,categorie) VALUES (NULL, :titre, :description, :photo, :pays, :ville, :adresse, :cp, :capacite,:categorie)");
+            $enregistrement->bindParam(':titre', $titre, PDO::PARAM_STR);
+        }
 
 
         // Enregistrement de la salle 
@@ -108,17 +198,19 @@ if (isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['pays
     }
 }
 
+// Message si modification
+if (!empty($_SESSION['message_utilisateur'])) {
+    $msg .= $_SESSION['message_utilisateur']; // on affiche le message
+    $_SESSION['message_utilisateur'] = ''; // on vide le message
+}
 
+// Récupération des produits en BDD
+$liste_salle = $pdo->query("SELECT * FROM salle");
+//do i add WHERE salle.id_salle = produit.id_salle   ???????????
 
 //Debut des affichages
 include '../inc/header.inc.php';
 include '../inc/nav.inc.php';
-?>
-
-<?php
-// Récupération des produits en BDD
-$liste_salle = $pdo->query("SELECT * FROM salle");
-
 ?>
 
 
@@ -132,18 +224,33 @@ $liste_salle = $pdo->query("SELECT * FROM salle");
         ?>
         <form method="post" action="gestion_salles.php" class="border p-3 row" enctype="multipart/form-data">
             <!-- champ caché id_produit pour la modification -->
-            <!-- <input type="hidden" name="id_produit" id="id_produit" value=""> -->
+            <input type="hidden" name="id_salle" id="id_salle" value="<?= $id_salle; ?>">
             <!-- champ caché id_produit pour la modification -->
             <div class="col-sm-6">
 
                 <div class="mb-3">
                     <label for="titre">Titre</label>
-                    <input type="text" name="titre" id="titre" class="form-control" value="<?= $titre; ?>">
+                    <input type="text" name="titre" id="titre" class="form-control" <?php if (!empty($id_salle)) {
+                                                                                        echo 'readonly';
+                                                                                    } ?> value="<?= $titre; ?>">
                 </div>
                 <div class="mb-3">
                     <label for="description">Description</label>
                     <textarea name="description" id="description" class="form-control" rows="4"><?= $description; ?></textarea>
                 </div>
+
+                <?php
+                // conservation de l'ancienne image lors d'une modification produit.
+                if (!empty($photo_actuelle)) {
+                    echo '<div class="mb-3">';
+                    echo '<label for="photo_actuelle">Photo actuelle</label><hr>';
+                    echo '<img src="' . URL . 'assets/img_produit/' . $photo_actuelle . '" width="100">';
+                    echo '<input type="hidden" name="photo_actuelle" value="' . $photo_actuelle . '">';
+                    echo '</div>';
+                }
+
+                ?>
+
                 <div class="mb-3">
                     <label for="photo">Photo</label>
                     <input type="file" name="photo" id="photo" class="form-control">
@@ -159,12 +266,16 @@ $liste_salle = $pdo->query("SELECT * FROM salle");
                     <label for="ville">Ville</label>
                     <select name="ville" id="ville" class="form-select">
                         <option value="Paris">Paris</option>
-                        <option value="Lyon">Lyon</option>
-                        <option value="Marseille">Marseille</option>
+
+                        <option <?php if ($categorie == 'Lyon') {
+                                    echo ' selected ';
+                                } ?>>Lyon</option>
+
+                        <option <?php if ($categorie == 'Marseille') {
+                                    echo ' selected ';
+                                } ?>>Marseille</option>
                     </select>
                 </div>
-
-
 
             </div>
             <div class="col-sm-6">
@@ -185,9 +296,17 @@ $liste_salle = $pdo->query("SELECT * FROM salle");
                 <div class="mb-3">
                     <label for="categorie">Catégorie</label>
                     <select name="categorie" id="categorie" class="form-select">
-                        <option value="reunion">Réunion</option>
-                        <option value="bureau">Bureau</option>
-                        <option value="formation">Formation</option>
+                        <option value="Reunion">Réunion</option>
+
+                        <option <?php if ($categorie == 'Bureau') {
+                                    echo ' selected ';
+                                } ?>>Bureau</option>
+
+                        <option <?php if ($categorie == 'Formation') {
+                                    echo ' selected ';
+                                } ?>>Formation</option>
+
+
                     </select>
                 </div>
                 <div class="mt-4">
@@ -199,12 +318,9 @@ $liste_salle = $pdo->query("SELECT * FROM salle");
     </div>
 </div>
 
-
-
-
 <div class="row mt-4">
     <div class="col-12">
-        <table class="table table-bordered text-center">
+        <table class="table table-bordered text-center mb-4">
             <thead class="bg-red text-white">
                 <tr>
                     <th>Id salle</th>
