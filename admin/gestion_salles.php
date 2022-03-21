@@ -199,7 +199,7 @@ if (!empty($_SESSION['message_utilisateur'])) {
     $_SESSION['message_utilisateur'] = ''; // on vide le message
 }
 
-// Récupération des produits en BDD
+// Récupération des salles en BDD
 $liste_salle = $pdo->query("SELECT * FROM salle");
 //do i add WHERE salle.id_salle = produit.id_salle   ???????????
 

@@ -14,9 +14,6 @@ include '../inc/nav.inc.php';
 
 ?>
 
-
-
-
 <div class="bg-light p-5 rounded text-center">
     <h1 class="letter">Gestion membre <i class="fa-solid fa-book"></i></h1>
 </div>
@@ -27,8 +24,9 @@ include '../inc/nav.inc.php';
         ?>
         <?php
 
+        echo '<div class="table-responsive">';
         echo '<table class="table table-bordered container text-center">';
-        echo '<tr class="bg-red">';
+        echo '<tr class="bg-red text-white">';
         echo '<th>id_membre</th><th>Pseudo</th><th>Nom</th><th>Prenom</th><th>Email</th><th>Civilite</th><th>Statut</th><th>Date_enregistrement</th><th>Modifier</th><th>Supprimer</th>';
         echo '</tr>';
 
@@ -50,6 +48,7 @@ include '../inc/nav.inc.php';
         }
 
         echo '</table>';
+        echo '</div>';
 
 
         ?>
