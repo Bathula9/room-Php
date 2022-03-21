@@ -8,10 +8,6 @@ include '../inc/functions.inc.php';
 $liste_membre = $pdo->query("SELECT id_membre,pseudo,nom,prenom,email,civilite,statut,date_enregistrement FROM membre");
 
 
-
-
-
-
 //Debut des affichages
 include '../inc/header.inc.php';
 include '../inc/nav.inc.php';

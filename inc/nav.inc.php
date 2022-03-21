@@ -29,7 +29,7 @@
                         <a class="nav-link" href="<?= URL; ?>profil.php">Profil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="connexion.php?action=deconnexion">Déconnexion</a>
+                        <a class="nav-link" href="<?= URL; ?>connexion.php?action=deconnexion">Déconnexion</a>
                     </li>
                 <?php } ?>
 
