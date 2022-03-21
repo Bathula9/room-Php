@@ -41,13 +41,13 @@ $id_salle = ''; // utilisé pour la modif
 
 $titre = '';
 $description = '';
+$photo = '';
 $pays = '';
 $ville = '';
 $adresse = '';
 $cp = '';
 $capacite = '';
 $categorie = '';
-$photo = '';
 
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
@@ -124,11 +124,9 @@ if (isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['pays
 
     // Si capacite est vide, on affecte 0 pour éviter une erreur sql
     if (empty($capacite) || !is_numeric($capacite)) {
-        $_SESSION['message_utilisateur'] .= '<div class="alert alert-warning mb-3">Attention,<br>le capacite a été affecté à 0.</div>';
+        $_SESSION['message_utilisateur'] .= '<div class="alert alert-warning mb-3">Attention,<br>le capacité a été affecté à 0.</div>';
         $capacite = 0;
     }
-
-
 
     // Contrôles sur la photo
     // Superglobale pour les pièces jointes d'un formulaire : $_FILES (obligatoire de mettre l'attribut enctype="" sur le form)
@@ -146,7 +144,7 @@ if (isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['pays
         // in_array('valeur', 'tableau');
         if (in_array($extension, $tab_formats)) {
 
-            // le nom de la photo peut correspondre à une autre photo déjà enregistrée. Pour éviter de l'écraser, on place la référence (qui est unique) devant le nom de la photo
+            // le nom de la photo peut correspondre à une autre photo déjà enregistrée. Pour éviter de l'écraser, on place le titre (qui est unique) devant le nom de la photo
             $photo = $titre . '-' . $_FILES['photo']['name'];
 
             // on enlève les caractères spéciaux
@@ -171,16 +169,13 @@ if (isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['pays
             $enregistrement->bindParam(':id_salle', $id_salle, PDO::PARAM_STR);
 
             // on crée un message dans la session pour confirmation la modif:
-            $_SESSION['message_utilisateur'] .= '<div class="alert alert-success mb-3">Le produit n°' . $id_salle . ' a bien été modifié.</div>';
+            $_SESSION['message_utilisateur'] .= '<div class="alert alert-success mb-3">La salle n°' . $id_salle . ' a bien été modifié.</div>';
         } else {
-            // Enregistrement du salle 
+            // Enregistrement de la salle 
             $enregistrement = $pdo->prepare("INSERT INTO salle (id_salle, titre, description, photo, pays, ville, adresse, cp, capacite,categorie) VALUES (NULL, :titre, :description, :photo, :pays, :ville, :adresse, :cp, :capacite,:categorie)");
             $enregistrement->bindParam(':titre', $titre, PDO::PARAM_STR);
         }
 
-
-        // Enregistrement de la salle 
-        $enregistrement = $pdo->prepare("INSERT INTO salle (id_salle, titre, description, photo, pays, ville, adresse, cp, capacite,categorie) VALUES (NULL, :titre, :description, :photo, :pays, :ville, :adresse, :cp, :capacite, :categorie)");
 
         $enregistrement->bindParam(':titre', $titre, PDO::PARAM_STR);
         $enregistrement->bindParam(':description', $description, PDO::PARAM_STR);
@@ -223,9 +218,9 @@ include '../inc/nav.inc.php';
         <?= $msg; // affichage des messages utilisateur  
         ?>
         <form method="post" action="gestion_salles.php" class="border p-3 row" enctype="multipart/form-data">
-            <!-- champ caché id_produit pour la modification -->
+            <!-- champ caché id_salle pour la modification -->
             <input type="hidden" name="id_salle" id="id_salle" value="<?= $id_salle; ?>">
-            <!-- champ caché id_produit pour la modification -->
+            <!-- champ caché id_salle pour la modification -->
             <div class="col-sm-6">
 
                 <div class="mb-3">
@@ -267,11 +262,11 @@ include '../inc/nav.inc.php';
                     <select name="ville" id="ville" class="form-select">
                         <option value="Paris">Paris</option>
 
-                        <option <?php if ($categorie == 'Lyon') {
+                        <option <?php if ($ville == 'Lyon') {
                                     echo ' selected ';
                                 } ?>>Lyon</option>
 
-                        <option <?php if ($categorie == 'Marseille') {
+                        <option <?php if ($ville == 'Marseille') {
                                     echo ' selected ';
                                 } ?>>Marseille</option>
                     </select>
@@ -296,13 +291,13 @@ include '../inc/nav.inc.php';
                 <div class="mb-3">
                     <label for="categorie">Catégorie</label>
                     <select name="categorie" id="categorie" class="form-select">
-                        <option value="Reunion">Réunion</option>
+                        <option value="reunion">Réunion</option>
 
-                        <option <?php if ($categorie == 'Bureau') {
+                        <option <?php if ($categorie == 'bureau') {
                                     echo ' selected ';
                                 } ?>>Bureau</option>
 
-                        <option <?php if ($categorie == 'Formation') {
+                        <option <?php if ($categorie == 'formation') {
                                     echo ' selected ';
                                 } ?>>Formation</option>
 
@@ -352,9 +347,9 @@ include '../inc/nav.inc.php';
                     echo '<td>' . $ligne['capacite'] . '</td>';
                     echo '<td>' . $ligne['categorie'] . '</td>';
 
-                    echo '<td><a href="?action=modifier&id_produit=' . $ligne['id_salle'] . '" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a></td>';
+                    echo '<td><a href="?action=modifier&id_salle=' . $ligne['id_salle'] . '" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a></td>';
 
-                    echo '<td><a href="?action=supprimer&id_produit=' . $ligne['id_salle'] . '" class="btn btn-danger" onclick="return(confirm(\'Etes-vous sûr ?\'))"><i class="fa-solid fa-trash-can"></i></a></td>';
+                    echo '<td><a href="?action=supprimer&id_salle=' . $ligne['id_salle'] . '" class="btn btn-danger" onclick="return(confirm(\'Etes-vous sûr ?\'))"><i class="fa-solid fa-trash-can"></i></a></td>';
 
                     echo '</tr>';
                 }
