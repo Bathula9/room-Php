@@ -141,24 +141,24 @@ include '../inc/nav.inc.php';
         <form action="gestion_produit.php" method="post" class="border mt-3 p-3 mb-4">
             <!-- champ caché id_produit pour la modification -->
             <input type="hidden" name="id_produit" id="id_produit" value="<?= $id_produit; ?>">
+
+
             <div class="mb-3">
-
-                <label for="id_salle">Salle</label>
+                <label for="id_salle">Salle :</label>
                 <select name="id_salle" id="id_salle" class="form-select">
-
                     <?php
                     while ($ligne = $liste_salle->fetch(PDO::FETCH_ASSOC)) {
                         // on remet la variable $selected vide à chaque tour de boucle
                         $selected = '';
 
                         if ($id_salle == $ligne['id_salle']) {
+                            // si la valeur précédemment choisie est égal à la valeur de la BDD on met 'selected' dans la variable pour que cette option soit affichée par défaut.
                             $selected = 'selected';
                         }
 
-                        echo '<option value="' . $ligne['id_salle'] . '">' . $ligne['id_salle'] . ' - ' . 'Salle '  . $ligne['titre'] . ' - '  .   $ligne['adresse'] . ' ' . $ligne['cp'] . ' ' . $ligne['ville'] . ' - ' . $ligne['capacite'] . ' pers' . '</option>';
+                        echo '<option value="' . $ligne['id_salle'] . '" ' . $selected . '>' . $ligne['id_salle'] . ' - ' . ' Salle ' . $ligne['titre'] . ' - ' .  $ligne['adresse'] . ', ' .  $ligne['cp'] . ', ' .  $ligne['ville'] . ' - ' . ($ligne['capacite']) . ' pers' . '</option>';
                     }
                     ?>
-
                 </select>
             </div>
 
@@ -205,7 +205,7 @@ include '../inc/nav.inc.php';
                     echo '<td>' . $ligne['id_produit'] . '</td>';
                     echo '<td>' . $ligne['date_arrivee'] . '</td>';
                     echo '<td>' . $ligne['date_depart'] . '</td>';
-                    echo '<td>' . $ligne['id_salle'] . '</td>';
+                    echo '<td>' . $ligne['id_salle'] . '<img src="' . URL . 'assets/img_produit/' . $ligne['photo'] . '" alt="salle" style="width :100px">' .  '</td>';
                     echo '<td>' . $ligne['prix'] . ' &euro;' . '</td>';
                     echo '<td>' . $ligne['etat'] . '</td>';
 
