@@ -74,6 +74,15 @@ include 'inc/nav.inc.php';
     </div>
 </div>
 
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col d-flex justify-content-between">
+            <a href="fiche_avis.php">Deposer un commentaire et une note</a>
+            <a href="index.php">Retour vers le catalogue</a>
+        </div>
+    </div>
+</div>
 <?php
 include 'inc/footer.inc.php';
 

@@ -71,7 +71,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'modifier' && !empty($_GET['id_
         $ville = $infos_salle['ville'];
         $adresse = $infos_salle['adresse'];
         $cp = $infos_salle['cp'];
-        $categorie = $infos_salle['capacite'];
+        $capacite = $infos_salle['capacite'];
         $categorie = $infos_salle['categorie'];
     }
 }
