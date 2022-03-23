@@ -31,7 +31,7 @@ include '../inc/nav.inc.php';
                 <p>Legal name: ROOM</p>
                 <p>Société par actions simplifiées au capital de 4.500.000 €</p>
                 <p>Represented by the President-Managing Director: B Xavier</p>
-                <p>Address: 300 Boulevard de Sebastopol, 75003 PARIS - France</p>
+                <p>Address: 300 Boulevard de Sébastopol, 75003 PARIS - France</p>
                 <p>Tel: +33 (0)1 53 43 43 00</p>
                 <p>E-Mail: reservations@room.com</p>
                 <p>Registration: 123 045 789</p>
@@ -48,7 +48,7 @@ include '../inc/nav.inc.php';
                     If no amicable settlement is reached within 30 days, guests
                     can contact the Mediator for Travel and Tourism, contact
                     details and terms and conditions of which are available on
-                    <a href="#">www.mtv.travel</a>
+                    <a href="#">www.rooms.travel</a>
                 </p>
                 <p>
                     Please be advised that any damage observed in the room during

@@ -16,17 +16,17 @@ $liste_capacite = $pdo->query("SELECT DISTINCT capacite FROM salle");
 // Récupération de tous les produits en BDD
 if (isset($_GET['categorie'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM salle WHERE produit.id_salle = salle.id_salle AND categorie = :categorie ORDER BY categorie");
+    $liste_produits = $pdo->prepare("SELECT * FROM salle,produit WHERE produit.id_salle = salle.id_salle AND categorie = :categorie ORDER BY categorie");
     $liste_produits->bindParam(':categorie', $_GET['categorie'], PDO::PARAM_STR);
     $liste_produits->execute();
 } elseif (isset($_GET['ville'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM salle WHERE produit.id_salle = salle.id_salle AND ville = :ville ORDER BY ville");
+    $liste_produits = $pdo->prepare("SELECT * FROM salle,produit WHERE produit.id_salle = salle.id_salle AND ville = :ville ORDER BY ville");
     $liste_produits->bindParam(':ville', $_GET['ville'], PDO::PARAM_STR);
     $liste_produits->execute();
 } elseif (isset($_GET['capacite'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM salle WHERE produit.id_salle = salle.id_salle AND capacite = :capacite ORDER BY capacite");
+    $liste_produits = $pdo->prepare("SELECT * FROM salle,produit WHERE produit.id_salle = salle.id_salle AND capacite = :capacite ORDER BY capacite");
     $liste_produits->bindParam(':capacite', $_GET['capacite'], PDO::PARAM_STR);
     $liste_produits->execute();
 } elseif (isset($_GET['rechercher'])) {
@@ -52,7 +52,7 @@ include 'inc/nav.inc.php';
 
 
 <div class="bg-light p-5 rounded text-center">
-    <h1 class="letter">Index <i class="fa-solid fa-book"></i></h1>
+    <h1 class="letter">Room <i class="fa-solid fa-book"></i></h1>
 </div>
 
 <div class="row mt-4">
@@ -95,6 +95,22 @@ include 'inc/nav.inc.php';
                     }
 
                     ?>
+                </ul>
+                <h3 class="pb-3 border-bottom mt-3">Prix</h3>
+                <div class="mb-3">
+                    <label for="prix">Prix</label>
+                    <input type="range" name="prix" id="prix">
+                </div>
+                <h3 class="pb-3 border-bottom mt-3">Period</h3>
+                <div class="mb-3">
+                    <label for="date_arrivee">Date d'arrivee</label>
+                    <input type="datetime-local" name="date_arrivee" id="date_arrivee">
+                </div>
+
+                <div class="mb-3">
+                    <label for="date_depart">Date de depart</label>
+                    <input type="datetime-local" name="date_depart" id="date_depart">
+                </div>
 
             </div>
             <div class="col-sm-9">
@@ -128,6 +144,9 @@ include 'inc/nav.inc.php';
 
     </div>
 </div>
+
+<!-- *** -->
+
 
 <?php
 include 'inc/footer.inc.php';
