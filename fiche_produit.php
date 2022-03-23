@@ -20,8 +20,50 @@ $produit = $infos_produit->fetch(PDO::FETCH_ASSOC);
 //CODE ...
 
 
-$googlestr = $produit['adresse'] . ',' . '+' . $produit['ville'] . ',' . '+' . $produit['pays'];
+//$googlestr = $produit['adresse'] . ',' . '+' . $produit['ville'] . ',' . '+' . $produit['pays'];
 //echo $googlestr;
+
+//code for the form
+
+if (isset($_POST['commentaire']) && isset($_POST['note'])) {
+
+
+    $id_membre = $_SESSION['membre']['id_membre'];
+    $id_salle = $_produit['id_salle'];
+    $commentaire = trim($_POST['commentaire']);
+    $note = trim($_POST['note']);
+
+    $erreur = false;
+
+    if (!$erreur) {
+        // Enregistrement des avis 
+        $enregistrement = $pdo->prepare("INSERT INTO avis (id_avis,id_membre, id_salle, commentaire, note, date_enregistrement) VALUES (NULL, id_membre, :id_salle, :commentaire, :note, NOW()");
+
+        $enregistrement->bindParam(':id_membre', $id_membre, PDO::PARAM_STR);
+        $enregistrement->bindParam(':id_salle', $id_salle, PDO::PARAM_STR);
+        $enregistrement->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
+        $enregistrement->bindParam(':note', $note, PDO::PARAM_STR);
+        $enregistrement->execute();
+
+        header('location: fiche_produit.php');
+        exit();
+    }
+}
+
+//code for the reservation part
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -36,8 +78,13 @@ include 'inc/nav.inc.php';
 
 
 <div class="bg-light p-5 rounded text-center">
-    <h1 class="letter">Produit : <?= ucfirst($produit['titre']); ?> <i class="fa-solid fa-book"></i></h1>
+    <h1 class="letter">Salle <?= ucfirst($produit['titre']); ?> <i class="fa-solid fa-book"></i></h1>
 </div>
+<div class="text-end mt-2">
+    <button class="btn btn-outline-danger">Reserver</button>
+</div>
+
+
 
 <div class="container mt-4">
     <div class="row align-content-center">
@@ -49,9 +96,9 @@ include 'inc/nav.inc.php';
         <div class="col-lg-5 col-md-12 my-auto">
             <p>
                 <?= ucfirst($produit['description']); ?> <br>
-            <div class="col">
+                <!-- <div class="col">
                 <th width="446" class="entry" scope="col"><iframe width="441" height="243" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.za/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=<?php echo $googlestr; ?>&amp;aq=&amp;ie=UTF8&amp;output=embed"></iframe><br />
-            </div>
+            </div> -->
             </p>
         </div>
 
@@ -77,12 +124,71 @@ include 'inc/nav.inc.php';
 
 <div class="container mt-3">
     <div class="row">
-        <div class="col d-flex justify-content-between">
-            <a href="fiche_avis.php">Deposer un commentaire et une note</a>
-            <a href="index.php">Retour vers le catalogue</a>
-        </div>
+        <?php if (user_is_connected()) { ?>
+            <div class="col d-flex justify-content-between">
+
+                <a href="index.php">Retour vers le catalogue</a>
+
+
+            </div>
     </div>
 </div>
+
+<div class="row mt-4">
+    <div class="col-sm-6 mx-auto">
+        <?= $msg; // affichage des messages utilisateur  
+        ?>
+        <form action="" method="post" class="border mt-3 p-3 mb-4">
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="note" id="radio" value="5" checked>
+                <label class="form-check-label" for="radio">
+                    &starf;&starf;&starf;&starf;&starf;
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="note" value="4" id="radio">
+                <label class="form-check-label" for="radio">
+                    &starf;&starf;&starf;&starf;
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="note" value="3" id="radio">
+                <label class="form-check-label" for="radio">
+                    &starf;&starf;&starf;
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="note" value="2" id="radio">
+                <label class="form-check-label" for="radio">
+                    &starf;&starf;
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="note" value="1" id="radio">
+                <label class="form-check-label" for="radio">
+                    &starf;
+                </label>
+            </div>
+
+            <div class="my-3">
+                <label for="avis">Laissez vos commentaires</label>
+                <input type="text" name="commentaire" class="form-control" id="avis" autocomplete="off" placeholder="Leave your comments" />
+            </div>
+
+            <div class="mb-3 col-md-12 text-center">
+                <button class="btn-btn-outline-danger" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php } else { ?>
+    <a href="inscription.php">Connectez-vous</a>
+<?php } ?>
+
+
+
 <?php
 include 'inc/footer.inc.php';
 

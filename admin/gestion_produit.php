@@ -78,11 +78,11 @@ if (isset($_POST['id_salle']) && isset($_POST['date_arrivee']) && isset($_POST['
         $id_produit = $_POST['id_produit'];
     }
 
-    // Si prix et stock sont vides, on affecte 0 pour éviter une erreur sql
-    // if (empty($prix) || !is_numeric($prix)) {
-    //     $_SESSION['message_utilisateur'] .= '<div class="alert alert-warning mb-3">Attention,<br>le prix a été affecté à 0.</div>';
-    //     $prix = 0;
-    // }
+    //Si prix est vide, on affecte 0 pour éviter une erreur sql
+    if (empty($prix) || !is_numeric($prix)) {
+        $_SESSION['message_utilisateur'] .= '<div class="alert alert-warning mb-3">Attention,<br>le prix a été affecté à 0.</div>';
+        $prix = 0;
+    }
 
     if (!$erreur) {
 
@@ -205,7 +205,7 @@ include '../inc/nav.inc.php';
                     echo '<td>' . $ligne['id_produit'] . '</td>';
                     echo '<td>' . $ligne['date_arrivee'] . '</td>';
                     echo '<td>' . $ligne['date_depart'] . '</td>';
-                    echo '<td>' . $ligne['id_salle'] . '<img src="' . URL . 'assets/img_produit/' . $ligne['photo'] . '" alt="salle" style="width :100px">' .  '</td>';
+                    echo '<td>' . $ligne['id_salle'] . ' - ' . 'Salle ' . $ligne['titre'] . '<br>' . '<img src="' . URL . 'assets/img_produit/' . $ligne['photo'] . '" alt="salle" style="width :100px">' .  '</td>';
                     echo '<td>' . $ligne['prix'] . ' &euro;' . '</td>';
                     echo '<td>' . $ligne['etat'] . '</td>';
 

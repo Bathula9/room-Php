@@ -49,7 +49,23 @@ include 'inc/nav.inc.php';
             <div class="row align-content-center">
                 <div class="col-lg-7 col-md-12 mb-lg-0 mb-3">
                     <div class="card border-0">
-                        <img src="assets/img/fille.jpg" alt="girl" class="img-fluid" />
+
+
+                        <?php if ($_SESSION['membre']['id_membre'] == 2) {  ?>
+                            <img src="assets/img/henry.jpg" alt="henry" class="img-fluid" />
+                        <?php } elseif ($_SESSION['membre']['id_membre'] == 3) { ?>
+                            <img src="assets/img/jane.jpg" alt="jane" class="img-fluid" />
+                        <?php } elseif ($_SESSION['membre']['id_membre'] == 4) { ?>
+                            <img src="assets/img/fille.jpg" alt="william" class="img-fluid" />
+                        <?php } elseif ($_SESSION['membre']['id_membre'] == 5) { ?>
+                            <img src="assets/img/fille.jpg" alt="nancy" class="img-fluid" />
+                        <?php } elseif ($_SESSION['membre']['id_membre'] == 6) { ?>
+                            <img src="assets/img/fille.jpg" alt="nancy" class="img-fluid" />
+                        <?php } else { ?>
+
+                            <img src="assets/img/fille.jpg" alt="woman" class="img-fluid" />
+                        <?php } ?>
+
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-12 my-auto">

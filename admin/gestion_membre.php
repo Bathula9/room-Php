@@ -2,6 +2,12 @@
 include '../inc/init.inc.php';
 include '../inc/functions.inc.php';
 
+// Restriction d'accès : si l'utilisateur n'est pas admin, on le redirige vers connexion.php
+if (!user_is_admin()) {
+    header('location: ../connexion.php');
+    exit(); // permet de bloquer le code php de la page (dans le cas ou qq'un passerait des informations get dans l'url)
+}
+
 
 //CODE ...
 //list of members
