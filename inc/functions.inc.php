@@ -19,7 +19,15 @@ function user_is_admin()
     return false;
 }
 
-
+function show_button()
+{
+    global $produit;
+    if ($produit['etat'] == 'libre') {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 

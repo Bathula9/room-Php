@@ -11,11 +11,17 @@
                 </li>
 
 
+
+
                 <?php if (!user_is_connected()) { ?>
 
 
                     <li class="nav-item">
                         <a class="nav-link" href="<?= URL; ?>connexion.php">Connexion</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Connexion</a>
                     </li>
 
 

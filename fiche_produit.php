@@ -45,7 +45,7 @@ if (isset($_POST['commentaire']) && isset($_POST['note'])) {
         $enregistrement->bindParam(':note', $note, PDO::PARAM_STR);
         $enregistrement->execute();
 
-        header('location: fiche_produit.php?id_produit' . $_GET['id_produit']);
+        header('location: fiche_produit.php?id_produit=' . $_GET['id_produit']);
         exit();
     }
 }
@@ -54,44 +54,25 @@ if (isset($_POST['commentaire']) && isset($_POST['note'])) {
 
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-// Commande produit
+// Commande produit - When I click the button reserver
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-if (isset($_GET['action']) && $_GET['action'] == 'reserver' && !empty($_GET['id_membre']) && !empty($_GET['id_produit'])) {
+if (isset($_GET['action']) && $_GET['action'] == 'reserver') {
 
-    $reservation = $pdo->prepare("SELECT * FROM commande WHERE id_commande = :id_commande");
-    $reservation->bindParam(':id_commande', $_GET['id_commande'], PDO::PARAM_STR);
-    $reservation->execute();
-    $msg .= '<div class="alert alert-success mb-3">La salle n°' . $_GET['id_produit'] . ' a bien été commandé.</div>';
-}
+    $enregistrer = $pdo->prepare("INSERT INTO commande (id_commande, id_membre, id_produit, date_enregistrement) VALUES (NULL, :id_membre, :id_produit, NOW())");
 
-
-//Enregistrer commande
-
-if (
-    isset($_POST['id_membre']) && isset($_POST['id_produit'])
-) {
-    $id_membre = $_SESSION['membre']['id_membre'];
-    $id_salle = $produit['id_salle'];
-
-    $enregistrer = $pdo->prepare("INSERT INTO commande (id_avis,id_commande, id_salle, commentaire, note, date_enregistrement) VALUES (NULL, :id_membre, :id_salle, :commentaire, :note, NOW())");
-
-    $enregistrer->bindParam(':id_membre', $id_membre, PDO::PARAM_STR);
-    $enregistrer->bindParam(':id_produit', $id_produit, PDO::PARAM_STR);
-
+    $enregistrer->bindParam(':id_membre', $_SESSION['membre']['id_membre'], PDO::PARAM_STR);
+    $enregistrer->bindParam(':id_produit', $produit['id_produit'], PDO::PARAM_STR);
     $enregistrer->execute();
+    $msg .= '<div class="alert alert-success mb-3">La produit n°' . $_GET['id_produit'] . ' a bien été commandé.</div>';
+
+    $enregistrer = $pdo->prepare("UPDATE produit SET etat = 'reservation' WHERE produit.id_produit  =:id_produit");
+    $enregistrer->bindParam(':id_produit', $produit['id_produit'], PDO::PARAM_STR);
+    $enregistrer->execute();
+
+    header('location: fiche_produit.php?id_produit=' . $_GET['id_produit']);
+    exit();
 }
-
-
-
-
-
-
-
-
-
-
-
 
 //Debut des affichages
 include 'inc/header.inc.php';
@@ -102,12 +83,19 @@ include 'inc/nav.inc.php';
 <div class="bg-light p-5 rounded text-center">
     <h1 class="letter">Salle <?= ucfirst($produit['titre']); ?> <i class="fa-solid fa-book"></i></h1>
 </div>
-<div class="text-end mt-2">
-    <a href="?action=reserver&id_commande="></a>
-    <button class="btn btn-outline-danger">Reserver</button>
+
+<div class="mt-2">
+    <p><i class="fas fa-bookmark"></i> Etat: <?= $produit['etat'] ?></p>
+    <div class="text-end mt-1">
+
+        <?php if (show_button()) { ?>
+
+            <a href="?action=reserver&id_produit=<?= $produit['id_produit'] ?>" class="btn btn-outline-danger">Reserver</a>
+        <?php } ?>
+    </div>
 </div>
 
-<div class="container mt-4">
+<div class="container">
     <div class="row align-content-center">
         <div class="col-lg-7 col-md-12 mb-lg-0 mb-5">
             <div class="card border-0">
@@ -141,7 +129,6 @@ include 'inc/nav.inc.php';
         </div>
     </div>
 </div>
-
 
 <div class="container mt-3">
     <div class="row">

@@ -47,7 +47,7 @@ if (isset($_POST['pseudo']) && isset($_POST['mdp'])) {
             $_SESSION['membre']['nom'] = $infos['nom'];
             $_SESSION['membre']['prenom'] = $infos['prenom'];
             $_SESSION['membre']['email'] = $infos['email'];
-            $_SESSION['membre']['sexe'] = $infos['sexe'];
+            $_SESSION['membre']['civilite'] = $infos['civilite'];
             $_SESSION['membre']['statut'] = $infos['statut'];
 
             // on redirige sur profil.php
@@ -79,7 +79,6 @@ echo '</pre>';
 
 <div class="bg-light p-5 rounded text-center">
     <h1 class="letter">Connexion</h1>
-    <!-- <p class="lead">Bienvenue au Room</p> -->
 </div>
 
 <div class="row mt-4">

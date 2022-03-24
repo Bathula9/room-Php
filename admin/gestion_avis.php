@@ -16,10 +16,11 @@ if (!user_is_admin()) {
 //------------------------------------------------------------------------------
 if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && !empty($_GET['id_avis'])) {
 
-    $suppression = $pdo->prepare("DELETE FROM produit WHERE id_avis = :id_avis");
+    $suppression = $pdo->prepare("DELETE FROM avis WHERE id_avis = :id_avis");
     $suppression->bindParam(':id_avis', $_GET['id_avis'], PDO::PARAM_STR);
     $suppression->execute();
-    $msg .= '<div class="alert alert-success mb-3">Le avis n°' . $_GET['id_avis'] . ' a bien été supprimé.</div>';
+
+    $msg .= '<div class="alert alert-success mb-3">L\'avis n°' . $_GET['id_avis'] . ' a bien été supprimé.</div>';
 }
 
 

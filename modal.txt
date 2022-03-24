@@ -33,3 +33,13 @@
   <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Launch
     Modal Login Form</a>
 </div>
+
+<div class="text-end mt-1">
+
+    <?php if (show_button()) { ?>
+
+        <a href="?action=reserver&id_produit=<?= $produit['id_produit'] ?>" class="btn btn-outline-danger">Reserver</a>
+    <?php } ?>
+</div>
+
+$liste_commande = $pdo->query("SELECT id_commande, membre.id_membre, email, produit.id_produit,prix, commande.date_enregistrement FROM commande, membre, produit WHERE commande.id_membre = membre.id_membre AND commande.id_produit = produit.id_produit");
