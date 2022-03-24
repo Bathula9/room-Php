@@ -9,9 +9,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="<?= URL; ?>index.php">Boutique</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= URL; ?>panier.php">Panier</a>
-                </li>
+
 
                 <?php if (!user_is_connected()) { ?>
 
