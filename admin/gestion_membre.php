@@ -49,65 +49,62 @@ include '../inc/nav.inc.php';
 </div>
 
 <div class="row mt-4">
-    <div class="col-sm-12">
+    <div class="col-sm-12 w-50 mx-auto">
         <?= $msg; // affichage des messages utilisateur  
         ?>
         <form action="gestion_membre.php" method="post" class="border mt-3 p-3 mb-4">
             <!-- champ caché id_produit pour la modification -->
             <input type="hidden" name="id_membre" id="id_membre" value="<?= $id_membre; ?>">
-            <div class="col-sm-6">
 
-                <div class="mb-3">
-                    <label for="pseudo">Pseudo</label>
-                    <input type="text" name="pseudo" id="pseudo" class="form-control">
-
-                </div>
-
-                <div class="mb-3">
-                    <label for="nom">Nom</label>
-                    <input type="text" name="nom" id="nom" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="prenom">Prenom</label>
-                    <input type="text" name="prenom" id="prenom" class="form-control">
-                </div>
+            <div class="mb-3">
+                <label for="pseudo">Pseudo</label>
+                <input type="text" name="pseudo" id="pseudo" class="form-control" value="">
 
             </div>
-            <div class="col-sm-6">
-                <div class="mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control">
-                </div>
 
-                <div class="mb-3">
-                    <label for="civilite">Civilite</label>
-                    <select name="civilite" id="civilite" class="form-select">
-                        <option value="m">Homme</option>
-
-                        <option <?php if ($civilite == 'Femme') {
-                                    echo ' selected ';
-                                } ?>>Femme</option>
-
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="statut">Statut</label>
-                    <select name="statut" id="statut" class="form-select">
-                        <option value="2">Administrateur</option>
-
-                        <option <?php if ($statut == '1') {
-                                    echo ' selected ';
-                                } ?>>Membre</option>
-
-                    </select>
-                </div>
-
-
-                <div class="mb-3 col-md-12 text-center">
-                    <button class="btn btn-danger" type="submit">Ajouter</button>
-                </div>
+            <div class="mb-3">
+                <label for="nom">Nom</label>
+                <input type="text" name="nom" id="nom" class="form-control" value="">
             </div>
+            <div class="mb-3">
+                <label for="prenom">Prenom</label>
+                <input type="text" name="prenom" id="prenom" class="form-control" value="">
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" value="">
+            </div>
+
+            <div class="mb-3">
+                <label for="civilite">Civilite</label>
+                <select name="civilite" id="civilite" class="form-select">
+                    <option value="m">Homme</option>
+
+                    <option <?php if ($civilite == 'Femme') {
+                                echo ' selected ';
+                            } ?>>Femme</option>
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="statut">Statut</label>
+                <select name="statut" id="statut" class="form-select">
+                    <option value="2">Administrateur</option>
+
+                    <option <?php if ($statut == '1') {
+                                echo ' selected ';
+                            } ?>>Membre</option>
+
+                </select>
+            </div>
+
+
+            <div class="mb-3 col-md-12 text-center">
+                <button class="btn btn-danger" type="submit">Ajouter</button>
+            </div>
+
         </form>
     </div>
 </div>

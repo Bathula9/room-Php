@@ -10,33 +10,30 @@
                     <a class="nav-link active" aria-current="page" href="<?= URL; ?>index.php">Boutique</a>
                 </li>
 
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Espace membre</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown03">
+
+                        <?php if (!user_is_connected()) { ?>
 
 
 
-                <?php if (!user_is_connected()) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="<?= URL; ?>connexion.php">Connexion</a>
+                            </li>
 
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= URL; ?>connexion.php">Connexion</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Connexion</a>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= URL; ?>inscription.php">Inscription</a>
-                    </li>
-                <?php } else { ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= URL; ?>profil.php">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= URL; ?>connexion.php?action=deconnexion">Déconnexion</a>
-                    </li>
-                <?php } ?>
-
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="<?= URL; ?>inscription.php">Inscription</a>
+                            </li>
+                        <?php } else { ?>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="<?= URL; ?>profil.php">Profil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="<?= URL; ?>connexion.php?action=deconnexion">Déconnexion</a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </li>
 
                 <?php
                 //? menu administration
@@ -58,41 +55,18 @@
 
                 <?php } ?>
 
-
-
-
-
-
-
-
-
-
-
             </ul>
+
+
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Rechercher">
                 <button class="btn btn-outline-light" type="submit">Rechercher</button>
             </form>
 
 
-            <!-- <div class="text-center">
-                <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Se connecter&nbsp;<i class="fa-solid fa-user"></i></a>
-            </div>
-         -->
-            <!-- ******** beginning of modal -->
 
-
-            <!-- ********end of modal -->
         </div>
     </div>
-
-
-
-
-
-
-
-
 </nav>
 
 
