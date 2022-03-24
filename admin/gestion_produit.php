@@ -203,8 +203,8 @@ include '../inc/nav.inc.php';
                 while ($ligne = $liste_produit->fetch(PDO::FETCH_ASSOC)) {
                     echo '<tr>';
                     echo '<td>' . $ligne['id_produit'] . '</td>';
-                    echo '<td>' . $ligne['date_arrivee'] . '</td>';
-                    echo '<td>' . $ligne['date_depart'] . '</td>';
+                    echo '<td>' . date("d/m/Y", strtotime($ligne['date_arrivee'])) . '</td>';
+                    echo '<td>' . date("d/m/Y", strtotime($ligne['date_depart'])) . '</td>';
                     echo '<td>' . $ligne['id_salle'] . ' - ' . 'Salle ' . $ligne['titre'] . '<br>' . '<img src="' . URL . 'assets/img_produit/' . $ligne['photo'] . '" alt="salle" style="width :100px">' .  '</td>';
                     echo '<td>' . $ligne['prix'] . ' &euro;' . '</td>';
                     echo '<td>' . $ligne['etat'] . '</td>';

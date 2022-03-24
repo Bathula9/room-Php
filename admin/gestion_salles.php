@@ -271,46 +271,46 @@ include '../inc/nav.inc.php';
                                 } ?>>Marseille</option>
                     </select>
                 </div>
-
             </div>
-            <div class="col-sm-6">
-                <div class="mb-3">
-                    <label for="adresse">Adresse</label>
-                    <textarea name="adresse" id="adresse" class="form-control" rows="4"><?= $adresse; ?></textarea>
-                </div>
-                <div class="mb-4">
-                    <label for="cp">Code Postal</label>
-                    <input type="text" name="cp" id="cp" class="form-control" value="<?= $cp; ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="capacite">Capacité</label>
-                    <input type="capacite" name="capacite" id="capacite" class="form-control" value="<?= $capacite; ?>">
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="categorie">Catégorie</label>
-                    <select name="categorie" id="categorie" class="form-select">
-                        <option value="reunion">Réunion</option>
-
-                        <option <?php if ($categorie == 'bureau') {
-                                    echo ' selected ';
-                                } ?>>Bureau</option>
-
-                        <option <?php if ($categorie == 'formation') {
-                                    echo ' selected ';
-                                } ?>>Formation</option>
-
-
-                    </select>
-                </div>
-                <div class="mt-4">
-                    <button type="submit" id="enregistrement_salle" class="w-100 btn btn-outline-danger"> Enregistrer </button>
-                </div>
-            </div>
-        </form>
-
     </div>
+    <div class="col-sm-6">
+        <div class="mb-3">
+            <label for="adresse">Adresse</label>
+            <textarea name="adresse" id="adresse" class="form-control" rows="4"><?= $adresse; ?></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="cp">Code Postal</label>
+            <input type="text" name="cp" id="cp" class="form-control" value="<?= $cp; ?>">
+        </div>
+        <div class="mb-3">
+            <label for="capacite">Capacité</label>
+            <input type="capacite" name="capacite" id="capacite" class="form-control" value="<?= $capacite; ?>">
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="categorie">Catégorie</label>
+            <select name="categorie" id="categorie" class="form-select">
+                <option value="reunion">Réunion</option>
+
+                <option <?php if ($categorie == 'bureau') {
+                            echo ' selected ';
+                        } ?>>Bureau</option>
+
+                <option <?php if ($categorie == 'formation') {
+                            echo ' selected ';
+                        } ?>>Formation</option>
+
+
+            </select>
+        </div>
+        <div class="mt-4">
+            <button type="submit" id="enregistrement_salle" class="w-100 btn btn-outline-danger"> Enregistrer </button>
+        </div>
+    </div>
+    </form>
+
+</div>
 </div>
 
 <div class="row mt-4">

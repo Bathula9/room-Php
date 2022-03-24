@@ -17,11 +17,11 @@ $sexe = '';
 
 if (isset($_POST['pseudo']) && isset($_POST['mdp']) && isset($_POST['confirm_mdp']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['sexe'])) {
 
-    echo 'Ok'; // To verify if it works
+    //echo 'Ok'; // To verify if it works
 
-    echo '<pre>';
-    echo print_r($_POST);
-    echo '</pre>';
+    // echo '<pre>';
+    // echo print_r($_POST);
+    // echo '</pre>';
 
     $pseudo = trim($_POST['pseudo']);
     $mdp = trim($_POST['mdp']);
