@@ -201,7 +201,6 @@ if (!empty($_SESSION['message_utilisateur'])) {
 
 // Récupération des salles en BDD
 $liste_salle = $pdo->query("SELECT * FROM salle");
-//do i add WHERE salle.id_salle = produit.id_salle   ???????????
 
 //Debut des affichages
 include '../inc/header.inc.php';
@@ -223,12 +222,15 @@ include '../inc/nav.inc.php';
             <!-- champ caché id_salle pour la modification -->
             <div class="col-sm-6">
 
+                <!-- titre -->
                 <div class="mb-3">
                     <label for="titre">Titre</label>
                     <input type="text" name="titre" id="titre" class="form-control" <?php if (!empty($id_salle)) {
                                                                                         echo 'readonly';
                                                                                     } ?> value="<?= $titre; ?>">
                 </div>
+
+                <!-- description -->
                 <div class="mb-3">
                     <label for="description">Description</label>
                     <textarea name="description" id="description" class="form-control" rows="4"><?= $description; ?></textarea>
@@ -245,11 +247,14 @@ include '../inc/nav.inc.php';
                 }
 
                 ?>
-
+                <!-- Photo -->
                 <div class="mb-3">
                     <label for="photo">Photo</label>
                     <input type="file" name="photo" id="photo" class="form-control">
                 </div>
+
+
+                <!-- Pays -->
                 <div class="mb-3">
                     <label for="pays">Pays</label>
                     <select name="pays" id="pays" class="form-select">
@@ -257,6 +262,8 @@ include '../inc/nav.inc.php';
 
                     </select>
                 </div>
+
+                <!-- Ville -->
                 <div class="mb-3">
                     <label for="ville">Ville</label>
                     <select name="ville" id="ville" class="form-select">
@@ -272,45 +279,52 @@ include '../inc/nav.inc.php';
                     </select>
                 </div>
             </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="mb-3">
-            <label for="adresse">Adresse</label>
-            <textarea name="adresse" id="adresse" class="form-control" rows="4"><?= $adresse; ?></textarea>
-        </div>
-        <div class="mb-4">
-            <label for="cp">Code Postal</label>
-            <input type="text" name="cp" id="cp" class="form-control" value="<?= $cp; ?>">
-        </div>
-        <div class="mb-3">
-            <label for="capacite">Capacité</label>
-            <input type="capacite" name="capacite" id="capacite" class="form-control" value="<?= $capacite; ?>">
-            </select>
-        </div>
 
-        <div class="mb-3">
-            <label for="categorie">Catégorie</label>
-            <select name="categorie" id="categorie" class="form-select">
-                <option value="reunion">Réunion</option>
+            <div class="col-sm-6">
+                <!-- adresse -->
+                <div class="mb-3">
+                    <label for="adresse">Adresse</label>
+                    <textarea name="adresse" id="adresse" class="form-control" rows="4"><?= $adresse; ?></textarea>
+                </div>
 
-                <option <?php if ($categorie == 'bureau') {
-                            echo ' selected ';
-                        } ?>>Bureau</option>
+                <!-- cp -->
+                <div class="mb-4">
+                    <label for="cp">Code Postal</label>
+                    <input type="text" name="cp" id="cp" class="form-control" value="<?= $cp; ?>">
+                </div>
 
-                <option <?php if ($categorie == 'formation') {
-                            echo ' selected ';
-                        } ?>>Formation</option>
+                <!-- capacite -->
+                <div class="mb-3">
+                    <label for="capacite">Capacité</label>
+                    <input type="capacite" name="capacite" id="capacite" class="form-control" value="<?= $capacite; ?>">
+                    </select>
+                </div>
+
+                <!-- categorie -->
+                <div class="mb-3">
+                    <label for="categorie">Catégorie</label>
+                    <select name="categorie" id="categorie" class="form-select">
+                        <option value="reunion">Réunion</option>
+
+                        <option <?php if ($categorie == 'bureau') {
+                                    echo ' selected ';
+                                } ?>>Bureau</option>
+
+                        <option <?php if ($categorie == 'formation') {
+                                    echo ' selected ';
+                                } ?>>Formation</option>
 
 
-            </select>
-        </div>
-        <div class="mt-4">
-            <button type="submit" id="enregistrement_salle" class="w-100 btn btn-outline-danger"> Enregistrer </button>
-        </div>
+                    </select>
+                </div>
+                <!-- button -->
+                <div class="mt-4">
+                    <button type="submit" id="enregistrement_salle" class="w-100 btn btn-outline-danger"> Enregistrer </button>
+                </div>
+            </div>
     </div>
     </form>
 
-</div>
 </div>
 
 <div class="row mt-4">
