@@ -23,9 +23,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && !empty($_GET['id
     $msg .= '<div class="alert alert-success mb-3">L\'avis n°' . $_GET['id_avis'] . ' a bien été supprimé.</div>';
 }
 
-
 //for the avis
-$liste_avis = $pdo->query("SELECT * FROM avis,membre,salle WHERE avis.id_membre = membre.id_membre AND avis.id_salle = salle.id_salle ORDER BY id_avis");
+
+//$liste_avis = $pdo->query("SELECT avis.id_avis, avis.id_membre, avis.commentaire, avis.note, avis.date_enregistrement, salle.id_salle, salle.titre FROM avis,membre,salle WHERE salle.id_membre = membre.id_membre AND commande.id_produit = produit.id_produit AND produit.id_salle=salle.id_salle ORDER BY id_commande");
+
+$liste_avis = $pdo->query("SELECT avis.id_avis, avis.id_membre, avis.id_salle, avis.commentaire, avis.note, avis.date_enregistrement, membre.email, salle.titre FROM avis, membre, salle WHERE avis.id_membre = membre.id_membre AND avis.id_salle = salle.id_salle ORDER BY id_avis");
+
 
 //Debut des affichages
 include '../inc/header.inc.php';
@@ -60,7 +63,7 @@ include '../inc/nav.inc.php';
                     echo '<td>' . $ligne['id_salle'] . ' ' . 'Salle ' . $ligne['titre'] . '</td>';
                     echo '<td>' . $ligne['commentaire'] . '</td>';
                     echo '<td>' . $ligne['note'] . '</td>';
-                    echo '<td>' . $ligne['date_enregistrement'] . '</td>';
+                    echo '<td>' . date("d/m/Y H:i", strtotime($ligne['date_enregistrement'])) . '</td>';
 
                     echo '<td><a href="?action=supprimer&id_avis=' . $ligne['id_avis'] . '" class="btn btn-danger" onclick="return(confirm(\'Etes-vous sûr ?\'))"><i class="fa-solid fa-trash-can"></i></a></td>';
 

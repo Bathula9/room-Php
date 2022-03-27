@@ -23,6 +23,12 @@ if ($_SESSION['membre']['statut'] == 1) {
     $statut = 'administrateur';
 }
 
+//display historique des commandes
+// $liste_commande = $pdo->prepare("SELECT id_commande, id_membre, produit.id_produit, date_enregistrement, prix, date_arrivee FROM commande, produit WHERE id_membre = :id_membre AND commande.id_produit = produit.id_produit");
+// $liste_commande->bindParam(':id_membre', $_SESSION['membre']['id_membre'], PDO::PARAM_STR);
+// $liste_commande->execute();
+
+
 //Debut des affichages
 include 'inc/header.inc.php';
 include 'inc/nav.inc.php';
@@ -82,6 +88,34 @@ include 'inc/nav.inc.php';
 
     </div>
 </div>
+
+
+<!-- Historique des commandes -->
+
+<!-- <div class="container mt-5">
+    <div class="row align-content-center">
+        <div class="col-lg-12 col-md-12 mb-lg-0 mb-3">
+            <table class="table text-center">
+                <thead class="bg-red text-white">
+                    <tr>
+                        <th>Numero Commande</th>
+                        <th>Numero Client</th>
+                        <th>Produit Commande</th>
+                        <th>Prix</th>
+                        <th>Date d'arrivee</th>
+                        <th>Date de la commande</th> -->
+
+<!-- </tr>
+                </thead> -->
+
+
+
+
+
+<!-- </table>
+</div>
+</div> -->
+
 
 <?php
 include 'inc/footer.inc.php';

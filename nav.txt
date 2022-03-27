@@ -40,3 +40,29 @@
                 <?php } ?>
 
 
+//// table for historique des commandes
+
+<?php
+if ($liste_commande->rowCount() > 0) {
+    while ($commande = $liste_commande->fetch(PDO::FETCH_ASSOC)) {
+
+        echo '<tr>';
+        echo '<td>' . $commande['id_commande'] . '</td>';
+        echo '<td>' . $commande['id_membre'] . '</td>';
+        echo '<td>' . $commande['id_produit'] . '</td>';
+        echo '<td>' . $commande['prix'] . ' ' . '&euro;' . '</td>';
+        echo '<td>'
+            . date("d/m/Y H:i", strtotime($commande['date_arrivee'])) . '</td>';
+
+        echo '<td>'
+            . date("d/m/Y H:i", strtotime($commande['date_enregistrement'])) . '</td>';
+
+
+        echo '</tr>';
+    }
+}
+
+
+
+
+?>
