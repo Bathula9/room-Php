@@ -29,6 +29,21 @@ if (isset($_GET['categorie'])) {
     $liste_produits = $pdo->prepare("SELECT * FROM salle,produit WHERE produit.id_salle = salle.id_salle AND capacite = :capacite ORDER BY capacite");
     $liste_produits->bindParam(':capacite', $_GET['capacite'], PDO::PARAM_STR);
     $liste_produits->execute();
+} elseif (isset($_GET['prix'])) {
+
+    $liste_produits = $pdo->prepare("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle AND prix <= :prix AND etat = 'libre' ORDER BY categorie, titre");
+    $liste_produits->bindParam(':prix', $_GET['prix'], PDO::PARAM_STR);
+    $liste_produits->execute();
+} elseif (isset($_GET['date_arrivee'])) {
+
+    $liste_produits = $pdo->prepare("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle AND date_arrivee = :date_arrivee  ORDER BY categorie, titre");
+    $liste_produits->bindParam(':date_arrivee', $_GET['date_arrivee'], PDO::PARAM_STR);
+    $liste_produits->execute();
+} elseif (isset($_GET['date_depart'])) {
+
+    $liste_produits = $pdo->prepare("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle AND date_depart = :date_depart AND etat = 'libre' ORDER BY categorie, titre");
+    $liste_produits->bindParam(':date_depart', $_GET['date_depart'], PDO::PARAM_STR);
+    $liste_produits->execute();
 } elseif (isset($_GET['rechercher'])) {
 
     $liste_produits = $pdo->prepare("SELECT * FROM salle, produit WHERE produit.id_salle = salle.id_salle AND (titre LIKE :rechercher OR description LIKE :rechercher) ORDER BY categorie");
@@ -47,9 +62,6 @@ include 'inc/header.inc.php';
 include 'inc/nav.inc.php';
 
 ?>
-
-
-
 
 <div class="bg-light p-5 rounded text-center">
     <h1 class="letter">Room <i class="fa-solid fa-book"></i></h1>
@@ -97,21 +109,30 @@ include 'inc/nav.inc.php';
                     ?>
                 </ul>
                 <h3 class="pb-3 border-bottom mt-3">Prix</h3>
-                <div class="mb-3">
-                    <label for="prix">Prix</label>
-                    <input type="range" name="prix" id="prix">
-                </div>
+                <form>
+                    <div class="mb-3 ">
+                        <label for="prix">Prix max <span id="prix_max">600</span> €</label>
+                        <input type="range" name="prix" id="prix" step="100" min="<?= $min_prix['min'] ?>" max="<?= $max_prix['max'] ?>" value="600">
+                        <button class="btn btn-danger btn-sm mt-2">Ok</button>
+                    </div>
+                </form>
                 <h3 class="pb-3 border-bottom mt-3">Period</h3>
-                <div class="mb-3">
-                    <label for="date_arrivee">Date d'arrivee</label>
-                    <input type="datetime-local" name="date_arrivee" id="date_arrivee">
-                </div>
+                <form class="p-1">
+                    <div class="mb-3">
+                        <label for="date_arrivee">Date d'arrivee</label>
+                        <input type="datetime-local" name="date_arrivee" id="date_arrivee">
+                        <button class="btn btn-sm mt-2 btn-danger">Ok</button>
+                    </div>
+                </form>
+                <form class="p-1">
 
-                <div class="mb-3">
-                    <label for="date_depart">Date de depart</label>
-                    <input type="datetime-local" name="date_depart" id="date_depart">
-                </div>
+                    <div class="mb-3">
+                        <label for="date_depart">Date de depart</label>
+                        <input type="datetime-local" name="date_depart" id="date_depart">
+                        <button class="btn btn-sm mt-2 btn-danger">Ok</button>
 
+                    </div>
+                </form>
             </div>
             <div class="col-sm-9">
                 <div class="row">

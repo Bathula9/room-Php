@@ -36,12 +36,15 @@
                 </li>
 
                 <?php
-                //? menu administration
+                // menu administration
                 if (user_is_admin()) {
                 ?>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Administration</a>
+
+                        <a class="nav-link dropdown-toggle <?= class_act(['gestion_produit', 'gestion_membre', 'gestion_salles', 'gestion_avis', 'gestion_commande', 'statistique']); ?>" href=" #" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Administration</a>
+
+
                         <ul class="dropdown-menu" aria-labelledby="dropdown03">
                             <li><a class="dropdown-item" href="<?= URL; ?>admin/gestion_produit.php">Gestion produit</a></li>
                             <li><a class="dropdown-item" href="<?= URL; ?>admin/gestion_membre.php">Gestion membre</a></li>
