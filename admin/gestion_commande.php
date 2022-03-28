@@ -20,7 +20,16 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && !empty($_GET['id
     $suppression = $pdo->prepare("DELETE FROM commande WHERE id_commande = :id_commande");
     $suppression->bindParam(':id_commande', $_GET['id_commande'], PDO::PARAM_STR);
     $suppression->execute();
-    $msg .= '<div class="alert alert-success mb-3">La commande n°' . $_GET['id_commande'] . ' a bien été supprimé.</div>';
+    $_SESSION['message_utilisateur'] .= '<div class="alert alert-success mb-3">La commande n°' . $_GET['id_commande'] . ' a bien été supprimé.</div>';
+
+
+    header('location : gestion_commande.php');
+    exit();
+}
+
+if (!empty($_SESSION['message_utilisateur'])) {
+    $msg .= $_SESSION['message_utilisateur']; // on affiche le message
+    $_SESSION['message_utilisateur'] = ''; // on vide le message
 }
 
 //$liste_commande = $pdo->query("SELECT id_commande, membre.id_membre, email, salle.titre, produit.id_produit,prix, commande.date_enregistrement FROM commande, membre, produit,salle WHERE commande.id_membre = membre.id_membre AND commande.id_produit = produit.id_produit");
@@ -40,6 +49,8 @@ include '../inc/nav.inc.php';
 
 <div class="row mt-4">
     <div class="col-12">
+        <?= $msg; ?>
+
         <table class="table table-bordered text-center">
             <thead class="bg-red text-white text-center">
                 <tr>

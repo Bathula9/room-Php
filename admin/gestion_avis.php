@@ -20,7 +20,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && !empty($_GET['id
     $suppression->bindParam(':id_avis', $_GET['id_avis'], PDO::PARAM_STR);
     $suppression->execute();
 
-    $msg .= '<div class="alert alert-success mb-3">L\'avis n°' . $_GET['id_avis'] . ' a bien été supprimé.</div>';
+    $_SESSION['message_utilisateur'] .= '<div class="alert alert-success mb-3">L\'avis n°' . $_GET['id_avis'] . ' a bien été supprimé.</div>';
+
+
+    header('location : gestion_avis.php');
+    exit();
 }
 
 //for the avis
@@ -28,6 +32,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && !empty($_GET['id
 //$liste_avis = $pdo->query("SELECT avis.id_avis, avis.id_membre, avis.commentaire, avis.note, avis.date_enregistrement, salle.id_salle, salle.titre FROM avis,membre,salle WHERE salle.id_membre = membre.id_membre AND commande.id_produit = produit.id_produit AND produit.id_salle=salle.id_salle ORDER BY id_commande");
 
 $liste_avis = $pdo->query("SELECT avis.id_avis, avis.id_membre, avis.id_salle, avis.commentaire, avis.note, avis.date_enregistrement, membre.email, salle.titre FROM avis, membre, salle WHERE avis.id_membre = membre.id_membre AND avis.id_salle = salle.id_salle ORDER BY id_avis");
+
+
+if (!empty($_SESSION['message_utilisateur'])) {
+    $msg .= $_SESSION['message_utilisateur']; // on affiche le message
+    $_SESSION['message_utilisateur'] = ''; // on vide le message
+}
 
 
 //Debut des affichages
@@ -42,6 +52,7 @@ include '../inc/nav.inc.php';
 
 <div class="row mt-4">
     <div class="col-12">
+        <?= $msg; ?>
         <table class="table table-bordered text-center">
             <thead class="bg-red text-white text-center">
                 <tr>
