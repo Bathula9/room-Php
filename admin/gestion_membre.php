@@ -68,7 +68,7 @@ if (isset($_POST['id_membre']) && isset($_POST['pseudo']) && isset($_POST['nom']
 
     if (!empty($id_membre)) {
 
-        $enregistrement = $pdo->prepare("UPDATE membre SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, civilite = :civilite,statut = :statut WHERE id_membre = :id_membre");
+        $enregistrement = $pdo->prepare("UPDATE membre SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, civilite = :civilite, statut = :statut WHERE id_membre = :id_membre");
         $enregistrement->bindParam(':id_membre', $id_membre, PDO::PARAM_STR);
         $enregistrement->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
         $enregistrement->bindParam(':nom', $nom, PDO::PARAM_STR);
@@ -81,8 +81,8 @@ if (isset($_POST['id_membre']) && isset($_POST['pseudo']) && isset($_POST['nom']
 
         $_SESSION['message_utilisateur'] .= '<div class="alert alert-success mb-3">Le membre n°' . $id_membre . ' a bien été modifié.</div>';
 
-        header('location: gestion_membre.php');
-        exit();
+        //header('location: gestion_membre.php');
+        //exit();
     }
 }
 
@@ -100,7 +100,12 @@ $liste_membre =
 //Debut des affichages
 include '../inc/header.inc.php';
 include '../inc/nav.inc.php';
+//echo $civilite;
 
+if (!empty($_SESSION['message_utilisateur'])) {
+    $msg .= $_SESSION['message_utilisateur']; // on affiche le message
+    $_SESSION['message_utilisateur'] = ''; // on vide le message
+}
 ?>
 
 <div class="bg-light p-5 rounded text-center">
@@ -145,9 +150,9 @@ include '../inc/nav.inc.php';
                 <select name="civilite" id="civilite" class="form-select">
                     <option value="m">Homme</option>
 
-                    <option <?php if ($civilite == 'f') {
-                                echo ' selected ';
-                            } ?>>Femme</option>
+                    <option value="f" <?php if ($civilite == 'f') {
+                                            echo ' selected ';
+                                        } ?>>Femme</option>
 
                 </select>
             </div>
@@ -157,9 +162,9 @@ include '../inc/nav.inc.php';
                 <select name="statut" id="statut" class="form-select">
                     <option value="2">Administrateur</option>
 
-                    <option <?php if ($statut == '1') {
-                                echo ' selected ';
-                            } ?>>Membre</option>
+                    <option value="1" <?php if ($statut == '1') {
+                                            echo ' selected ';
+                                        } ?>>Membre</option>
 
                 </select>
             </div>

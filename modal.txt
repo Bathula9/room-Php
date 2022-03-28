@@ -43,3 +43,14 @@
 </div>
 
 $liste_commande = $pdo->query("SELECT id_commande, membre.id_membre, email, produit.id_produit,prix, commande.date_enregistrement FROM commande, membre, produit WHERE commande.id_membre = membre.id_membre AND commande.id_produit = produit.id_produit");
+
+<?= class_act(['gestion_produit', 'gestion_membre', 'gestion_salles', 'gestion_avis', 'gestion_commande', 'statistique']); ?>
+
+<h3 class="pb-3 border-bottom mt-3">Prix</h3>
+                <form>
+                    <div class="mb-3 ">
+                        <label for="prix">Prix max <span id="prix_max">600</span> €</label>
+                        <input type="range" name="prix" id="prix" step="100" min="<?= $min_prix['min'] ?>" max="<?= $max_prix['max'] ?>" value="600">
+                        <button class="btn btn-danger btn-sm mt-2">Ok</button>
+                    </div>
+                </form>

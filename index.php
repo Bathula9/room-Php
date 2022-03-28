@@ -16,23 +16,18 @@ $liste_capacite = $pdo->query("SELECT DISTINCT capacite FROM salle");
 // Récupération de tous les produits en BDD
 if (isset($_GET['categorie'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM salle,produit WHERE produit.id_salle = salle.id_salle AND categorie = :categorie ORDER BY categorie");
+    $liste_produits = $pdo->prepare("SELECT * FROM produit,salle WHERE produit.id_salle = salle.id_salle AND categorie = :categorie ORDER BY categorie");
     $liste_produits->bindParam(':categorie', $_GET['categorie'], PDO::PARAM_STR);
     $liste_produits->execute();
 } elseif (isset($_GET['ville'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM salle,produit WHERE produit.id_salle = salle.id_salle AND ville = :ville ORDER BY ville");
+    $liste_produits = $pdo->prepare("SELECT * FROM produit,salle WHERE produit.id_salle = salle.id_salle AND ville = :ville ORDER BY ville");
     $liste_produits->bindParam(':ville', $_GET['ville'], PDO::PARAM_STR);
     $liste_produits->execute();
 } elseif (isset($_GET['capacite'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM salle,produit WHERE produit.id_salle = salle.id_salle AND capacite = :capacite ORDER BY capacite");
+    $liste_produits = $pdo->prepare("SELECT * FROM produit,salle WHERE produit.id_salle = salle.id_salle AND capacite = :capacite ORDER BY capacite");
     $liste_produits->bindParam(':capacite', $_GET['capacite'], PDO::PARAM_STR);
-    $liste_produits->execute();
-} elseif (isset($_GET['prix'])) {
-
-    $liste_produits = $pdo->prepare("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle AND prix <= :prix AND etat = 'libre' ORDER BY categorie, titre");
-    $liste_produits->bindParam(':prix', $_GET['prix'], PDO::PARAM_STR);
     $liste_produits->execute();
 } elseif (isset($_GET['date_arrivee'])) {
 
@@ -46,14 +41,13 @@ if (isset($_GET['categorie'])) {
     $liste_produits->execute();
 } elseif (isset($_GET['rechercher'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM salle, produit WHERE produit.id_salle = salle.id_salle AND (titre LIKE :rechercher OR description LIKE :rechercher) ORDER BY categorie");
+    $liste_produits = $pdo->prepare("SELECT * FROM produit,salle WHERE produit.id_salle = salle.id_salle AND (titre LIKE :rechercher OR description LIKE :rechercher) ORDER BY categorie");
     //      on prépare l'argument car il faut les % pour le LIKE
     $rechercher = '%' . trim($_GET['rechercher']) . '%';
-
     $liste_produits->bindParam(':rechercher', $rechercher, PDO::PARAM_STR);
     $liste_produits->execute();
 } else {
-    $liste_produits = $pdo->query("SELECT DISTINCT * FROM salle, produit WHERE produit.id_salle = salle.id_salle");
+    $liste_produits = $pdo->query("SELECT DISTINCT * FROM salle, produit WHERE produit.id_salle = salle.id_salle AND etat = 'libre'");
 }
 
 
@@ -108,14 +102,7 @@ include 'inc/nav.inc.php';
 
                     ?>
                 </ul>
-                <h3 class="pb-3 border-bottom mt-3">Prix</h3>
-                <form>
-                    <div class="mb-3 ">
-                        <label for="prix">Prix max <span id="prix_max">600</span> €</label>
-                        <input type="range" name="prix" id="prix" step="100" min="<?= $min_prix['min'] ?>" max="<?= $max_prix['max'] ?>" value="600">
-                        <button class="btn btn-danger btn-sm mt-2">Ok</button>
-                    </div>
-                </form>
+
                 <h3 class="pb-3 border-bottom mt-3">Period</h3>
                 <form class="p-1">
                     <div class="mb-3">

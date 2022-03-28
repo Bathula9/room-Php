@@ -42,7 +42,7 @@
 
                     <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle <?= class_act(['gestion_produit', 'gestion_membre', 'gestion_salles', 'gestion_avis', 'gestion_commande', 'statistique']); ?>" href=" #" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Administration</a>
+                        <a class="nav-link dropdown-toggle" href=" #" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Administration</a>
 
 
                         <ul class="dropdown-menu" aria-labelledby="dropdown03">
