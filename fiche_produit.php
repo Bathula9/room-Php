@@ -89,8 +89,10 @@ include 'inc/nav.inc.php';
     <div class="text-end mt-1">
 
         <?php if (show_button()) { ?>
+            <?php if (user_is_connected()) { ?>
 
-            <a href="?action=reserver&id_produit=<?= $produit['id_produit'] ?>" class="btn btn-outline-danger">Reserver</a>
+                <a href="?action=reserver&id_produit=<?= $produit['id_produit'] ?>" class="btn btn-outline-danger">Reserver</a>
+            <?php } ?>
         <?php } ?>
     </div>
 </div>
