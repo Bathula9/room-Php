@@ -24,9 +24,9 @@ if ($_SESSION['membre']['statut'] == 1) {
 }
 
 //display historique des commandes
-// $liste_commande = $pdo->prepare("SELECT id_commande, id_membre, produit.id_produit, date_enregistrement, prix, date_arrivee FROM commande, produit WHERE id_membre = :id_membre AND commande.id_produit = produit.id_produit");
-// $liste_commande->bindParam(':id_membre', $_SESSION['membre']['id_membre'], PDO::PARAM_STR);
-// $liste_commande->execute();
+$liste_commande = $pdo->prepare("SELECT id_commande, id_membre, produit.id_produit, salle.id_salle, salle.titre,date_enregistrement, prix, date_arrivee FROM commande, produit,salle WHERE id_membre = :id_membre AND commande.id_produit = produit.id_produit AND produit.id_salle = salle.id_salle");
+$liste_commande->bindParam(':id_membre', $_SESSION['membre']['id_membre'], PDO::PARAM_STR);
+$liste_commande->execute();
 
 
 //Debut des affichages
@@ -92,7 +92,7 @@ include 'inc/nav.inc.php';
 
 <!-- Historique des commandes -->
 
-<!-- <div class="container mt-5">
+<div class="container mt-5">
     <div class="row align-content-center">
         <div class="col-lg-12 col-md-12 mb-lg-0 mb-3">
             <table class="table text-center">
@@ -103,21 +103,40 @@ include 'inc/nav.inc.php';
                         <th>Produit Commande</th>
                         <th>Prix</th>
                         <th>Date d'arrivee</th>
-                        <th>Date de la commande</th> -->
+                        <th>Date de la commande</th>
 
-<!-- </tr>
-                </thead> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($liste_commande->rowCount() > 0) {
+                        while ($commande = $liste_commande->fetch(PDO::FETCH_ASSOC)) {
+
+                            echo '<tr>';
+                            echo '<td>' . $commande['id_commande'] . '</td>';
+                            echo '<td>' . $commande['id_membre'] . '</td>';
+                            echo '<td>' . $commande['id_produit'] . '</td>';
+                            echo '<td>' . $commande['prix'] . ' ' . '&euro;' . '</td>';
+                            echo '<td>'
+                                . date("d/m/Y H:i", strtotime($commande['date_arrivee'])) . '</td>';
+
+                            echo '<td>'
+                                . date("d/m/Y H:i", strtotime($commande['date_enregistrement'])) . '</td>';
 
 
+                            echo '</tr>';
+                        }
+                    }
+                    ?>
+                </tbody>
 
 
+            </table>
+        </div>
+    </div>
 
-<!-- </table>
-</div>
-</div> -->
 
+    <?php
+    include 'inc/footer.inc.php';
 
-<?php
-include 'inc/footer.inc.php';
-
-?>
+    ?>

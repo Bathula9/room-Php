@@ -15,8 +15,6 @@
 
                         <?php if (!user_is_connected()) { ?>
 
-
-
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="<?= URL; ?>connexion.php">Connexion</a>
                             </li>
@@ -62,7 +60,7 @@
 
 
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Rechercher">
+                <input class="form-control me-2" type="search" placeholder="Rechercher" name="rechercher" aria-label="Rechercher">
                 <button class="btn btn-outline-light" type="submit">Rechercher</button>
             </form>
 
