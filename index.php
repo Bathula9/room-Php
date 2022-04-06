@@ -31,7 +31,7 @@ if (isset($_GET['categorie'])) {
     $liste_produits->execute();
 } elseif (isset($_GET['date_arrivee'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle AND date_arrivee = :date_arrivee  ORDER BY categorie, titre");
+    $liste_produits = $pdo->prepare("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle AND date_arrivee = :date_arrivee AND etat = 'libre' ORDER BY categorie, titre");
     $liste_produits->bindParam(':date_arrivee', $_GET['date_arrivee'], PDO::PARAM_STR);
     $liste_produits->execute();
 } elseif (isset($_GET['date_depart'])) {
@@ -41,13 +41,14 @@ if (isset($_GET['categorie'])) {
     $liste_produits->execute();
 } elseif (isset($_GET['rechercher'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM produit,salle WHERE produit.id_salle = salle.id_salle AND (titre LIKE :rechercher OR description LIKE :rechercher) ORDER BY categorie");
-    //      on prépare l'argument car il faut les % pour le LIKE
+    $liste_produits = $pdo->prepare("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle AND etat = 'libre' AND(titre LIKE :rechercher OR description LIKE :rechercher) ORDER BY categorie, titre");
+    // on prépare l'argument car il faut les % pour le LIKE
     $rechercher = '%' . trim($_GET['rechercher']) . '%';
+
     $liste_produits->bindParam(':rechercher', $rechercher, PDO::PARAM_STR);
     $liste_produits->execute();
 } else {
-    $liste_produits = $pdo->query("SELECT DISTINCT * FROM salle, produit WHERE produit.id_salle = salle.id_salle AND etat = 'libre'");
+    $liste_produits = $pdo->query("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle AND etat = 'libre' ORDER BY categorie, titre");
 }
 
 
