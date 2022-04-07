@@ -7,8 +7,8 @@ include 'inc/functions.inc.php';
 
 //déconnexion utilisateur
 if (isset($_GET['action']) && $_GET['action'] == 'deconnexion') {
-    //session_destroy();
-    $_SESSION['membre'] = [];
+    session_destroy();
+    //$_SESSION['membre'] = [];
 }
 
 // Restriction d'accès : si l'utilisateur est connecté, on le redirige sur profil.php
