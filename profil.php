@@ -5,19 +5,21 @@ include 'inc/functions.inc.php';
 
 //CODE ...
 
+
 if (!user_is_connected()) {
     header('location: connexion.php');
 }
 
+$membre = $_SESSION["membre"];
 
 //to display homme and femme
-if ($_SESSION['membre']['civilite'] == 'm') {
+if ($membre['civilite'] == 'm') {
     $sexe = 'homme';
 } else {
     $sexe = 'femme';
 }
 
-if ($_SESSION['membre']['statut'] == 1) {
+if ($membre['statut'] == 1) {
     $statut = 'membre';
 } else {
     $statut = 'administrateur';
@@ -25,7 +27,8 @@ if ($_SESSION['membre']['statut'] == 1) {
 
 //display historique des commandes
 $liste_commande = $pdo->prepare("SELECT id_commande, id_membre, produit.id_produit, salle.id_salle, salle.titre,date_enregistrement, prix, date_arrivee FROM commande, produit,salle WHERE id_membre = :id_membre AND commande.id_produit = produit.id_produit AND produit.id_salle = salle.id_salle");
-$liste_commande->bindParam(':id_membre', $_SESSION['membre']['id_membre'], PDO::PARAM_STR);
+$liste_commande->bindParam(':id_membre', $membre['id_membre'], PDO::PARAM_STR);
+//$liste_commande->bindParam(':id_membre', $_SESSION['membre']['id_membre'], PDO::PARAM_STR);
 $liste_commande->execute();
 
 
@@ -50,19 +53,19 @@ include 'inc/nav.inc.php';
                     <div class="card border-0">
 
 
-                        <?php if ($_SESSION['membre']['id_membre'] == 2) {  ?>
+                        <?php if ($membre['id_membre'] == 2) {  ?>
                             <img src="assets/img/henry.jpg" alt="henry" class="img-fluid" />
-                        <?php } elseif ($_SESSION['membre']['id_membre'] == 3) { ?>
+                        <?php } elseif ($membre['id_membre'] == 3) { ?>
                             <img src="assets/img/jane.jpg" alt="jane" class="img-fluid" />
-                        <?php } elseif ($_SESSION['membre']['id_membre'] == 4) { ?>
+                        <?php } elseif ($membre['id_membre'] == 4) { ?>
                             <img src="assets/img/william.jpg" alt="william" class="img-fluid" />
-                        <?php } elseif ($_SESSION['membre']['id_membre'] == 5) { ?>
+                        <?php } elseif ($membre['id_membre'] == 5) { ?>
                             <img src="assets/img/nancy.jpg" alt="nancy" class="img-fluid" />
-                        <?php } elseif ($_SESSION['membre']['id_membre'] == 6) { ?>
+                        <?php } elseif ($membre['id_membre'] == 6) { ?>
                             <img src="assets/img/steve.jpg" alt="steve" class="img-fluid" />
-                        <?php } elseif ($_SESSION['membre']['id_membre'] == 7) { ?>
+                        <?php } elseif ($membre['id_membre'] == 7) { ?>
                             <img src="assets/img/lily.jpg" alt="lily" class="img-fluid" />
-                        <?php } elseif ($_SESSION['membre']['id_membre'] == 8) { ?>
+                        <?php } elseif ($membre['id_membre'] == 8) { ?>
                             <img src="assets/img/gucci.jpg" alt="gucci" class="img-fluid" />
                         <?php } else { ?>
 
@@ -73,11 +76,11 @@ include 'inc/nav.inc.php';
                 </div>
                 <div class="col-lg-5 col-md-12 my-auto">
                     <ul class="list-group">
-                        <li class="list-group-item"><span class="fw-bold">Profil: </span> <?= $_SESSION['membre']['pseudo']; ?></li>
-                        <li class="list-group-item"><span class="fw-bold">Client: </span> <?= $_SESSION['membre']['id_membre']; ?></li>
-                        <li class="list-group-item"><span class="fw-bold">Nom: </span> <?= $_SESSION['membre']['nom']; ?></li>
-                        <li class="list-group-item"><span class="fw-bold">Prenom: </span> <?= $_SESSION['membre']['prenom']; ?></li>
-                        <li class="list-group-item"><span class="fw-bold">Email: </span> <?= $_SESSION['membre']['email']; ?></li>
+                        <li class="list-group-item"><span class="fw-bold">Profil: </span> <?= $membre['pseudo']; ?></li>
+                        <li class="list-group-item"><span class="fw-bold">Client: </span> <?= $membre['id_membre']; ?></li>
+                        <li class="list-group-item"><span class="fw-bold">Nom: </span> <?= $membre['nom']; ?></li>
+                        <li class="list-group-item"><span class="fw-bold">Prenom: </span> <?= $membre['prenom']; ?></li>
+                        <li class="list-group-item"><span class="fw-bold">Email: </span> <?= $membre['email']; ?></li>
                         <li class="list-group-item"><span class="fw-bold">Sexe: </span> <?= $sexe; ?></li>
                         <li class="list-group-item"><span class="fw-bold">Statut: </span> <?= $statut; ?></li>
 
