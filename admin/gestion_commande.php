@@ -13,18 +13,25 @@ if (!user_is_admin()) {
 
 if (isset($_GET['action']) && $_GET['action'] == 'supprimer' && !empty($_GET['id_commande'])) {
 
-    $recup_commande = $pdo->prepare("SELECT * FROM commande WHERE id_commande =:id_commande");
-    $recup_commande->bindParam(':id_commande', $_GET['id_commande'], PDO::PARAM_STR);
-    $recup_commande->execute();
-
+    $test = $pdo->prepare("SELECT id_produit FROM commande WHERE id_commande=:id_commande");
+    $test->bindParam(':id_commande', $_GET['id_commande'], PDO::PARAM_STR);
+    $test->execute();
+    $test2 = $test->fetch();
+    $id_produit = $test2["id_produit"];
+    $update = $pdo->prepare("UPDATE produit set etat='libre' WHERE id_produit=:id_produit");
+    $update->bindParam(":id_produit", $id_produit, PDO::PARAM_STR);
+    $update->execute();
     $suppression = $pdo->prepare("DELETE FROM commande WHERE id_commande = :id_commande");
     $suppression->bindParam(':id_commande', $_GET['id_commande'], PDO::PARAM_STR);
     $suppression->execute();
+
+
+
     $_SESSION['message_utilisateur'] .= '<div class="alert alert-success mb-3">La commande n°' . $_GET['id_commande'] . ' a bien été supprimé.</div>';
 
 
-    header('location : gestion_commande.php');
-    exit();
+    //header('location : gestion_commande.php');
+    //exit();
 }
 
 if (!empty($_SESSION['message_utilisateur'])) {
@@ -55,6 +62,7 @@ include '../inc/nav.inc.php';
             <thead class="bg-red text-white text-center">
                 <tr>
                     <th>Id commande</th>
+                    <th>Id Salle</th>
                     <th>Id membre</th>
                     <th>Id produit</th>
                     <th>Prix</th>
@@ -67,6 +75,7 @@ include '../inc/nav.inc.php';
                 while ($ligne = $liste_commande->fetch(PDO::FETCH_ASSOC)) {
                     echo '<tr>';
                     echo '<td>' . $ligne['id_commande'] . '</td>';
+                    echo '<td>' . $ligne['id_salle'] . '</td>';
                     echo '<td>' . $ligne['id_membre'] . ' ' . '- ' . $ligne['email'] . '</td>';
                     echo '<td>' . $ligne['id_produit'] . ' ' . '- ' . $ligne['titre'] . '</td>';
                     echo '<td>' . $ligne['prix'] . ' &euro;' . '</td>';
