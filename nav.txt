@@ -66,3 +66,26 @@ if ($liste_commande->rowCount() > 0) {
 
 
 ?>
+
+$test=$pdo->prepare("SELECT id_produit FROM commande WHERE id_commande=:id_commande");
+    $test->bindParam(':id_commande', $_GET['id_commande'], PDO::PARAM_STR);
+    $test->execute();
+    $test2=$test->fetch();
+    $id_produit=$test2["id_produit"];
+    $update=$pdo->prepare("UPDATE produit set etat='libre' WHERE id_produit=:id_produit" );
+    $update->bindParam(":id_produit",$id_produit,PDO::PARAM_STR);
+    $update->execute();
+    $suppression = $pdo->prepare("DELETE FROM commande WHERE id_commande = :id_commande");
+    $suppression->bindParam(':id_commande', $_GET['id_commande'], PDO::PARAM_STR);
+
+    $suppression->execute();
+
+
+/old
+    $recup_commande = $pdo->prepare("SELECT * FROM commande WHERE id_commande =:id_commande");
+    $recup_commande->bindParam(':id_commande', $_GET['id_commande'], PDO::PARAM_STR);
+    $recup_commande->execute();
+
+    $suppression = $pdo->prepare("DELETE FROM commande WHERE id_commande = :id_commande");
+    $suppression->bindParam(':id_commande', $_GET['id_commande'], PDO::PARAM_STR);
+    $suppression->execute();

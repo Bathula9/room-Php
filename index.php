@@ -41,7 +41,7 @@ if (isset($_GET['categorie'])) {
     $liste_produits->execute();
 } elseif (isset($_GET['rechercher'])) {
 
-    $liste_produits = $pdo->prepare("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle AND etat = 'libre' AND(titre LIKE :rechercher OR description LIKE :rechercher) ORDER BY categorie, titre");
+    $liste_produits = $pdo->prepare("SELECT * FROM produit, salle WHERE produit.id_salle = salle.id_salle  AND(titre LIKE :rechercher OR description LIKE :rechercher) ORDER BY categorie, titre");
     // on prépare l'argument car il faut les % pour le LIKE
     $rechercher = '%' . trim($_GET['rechercher']) . '%';
 
