@@ -20,7 +20,7 @@ $produit = $infos_produit->fetch(PDO::FETCH_ASSOC);
 //CODE ...
 
 
-//$googlestr = $produit['adresse'] . ',' . '+' . $produit['ville'] . ',' . '+' . $produit['pays'];
+$googlestr = $produit['adresse'] . ',' . '+' . $produit['ville'] . ',' . '+' . $produit['pays'];
 //echo $googlestr;
 
 //code for the form
@@ -107,9 +107,9 @@ include 'inc/nav.inc.php';
         <div class="col-lg-5 col-md-12 my-auto">
             <p>
                 <?= ucfirst($produit['description']); ?> <br>
-                <!-- <div class="col">
+            <div class="col">
                 <th width="446" class="entry" scope="col"><iframe width="441" height="243" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.za/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=<?php echo $googlestr; ?>&amp;aq=&amp;ie=UTF8&amp;output=embed"></iframe><br />
-            </div> -->
+            </div>
             </p>
         </div>
 
