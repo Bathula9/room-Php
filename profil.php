@@ -137,9 +137,10 @@ include 'inc/nav.inc.php';
             </table>
         </div>
     </div>
+</div>
 
 
-    <?php
-    include 'inc/footer.inc.php';
+<?php
+include 'inc/footer.inc.php';
 
-    ?>
+?>

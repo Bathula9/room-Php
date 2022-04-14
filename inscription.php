@@ -127,7 +127,7 @@ include 'inc/nav.inc.php';
                     <?= $msg; // affichage des user messages
                     ?>
 
-                    <form action="" method="POST" class="border p-4">
+                    <form method="POST" class="border p-4">
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label for="pseudo">Pseudo</label>
@@ -166,18 +166,12 @@ include 'inc/nav.inc.php';
                             </div>
                         </div>
 
-
-
-
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </section>
-
-
 
 
 <?php

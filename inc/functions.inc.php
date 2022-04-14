@@ -30,21 +30,21 @@ function show_button()
 }
 
 // fonction pour gérer le <title> de la page
-// function get_name()
-// {
-//     $page_name = ucfirst(basename($_SERVER['PHP_SELF'], ".php"));
-//     $page_name = str_replace('_', ' ', $page_name);
-//     return $page_name;
-// }
+function get_name()
+{
+    $page_name = ucfirst(basename($_SERVER['PHP_SELF'], ".php"));
+    $page_name = str_replace('_', ' ', $page_name);
+    return $page_name;
+}
 
-// // fonction pour gérer une classe active sur les liens du menu
-// function class_act($page)
-// {
-//     $page_name = basename($_SERVER['PHP_SELF'], ".php");
-//     if (in_array($page_name, $page)) {
-//         return 'active';
-//     }
-// }
+//  fonction pour gérer une classe active sur les liens du menu
+function class_act($page)
+{
+    $page_name = basename($_SERVER['PHP_SELF'], ".php");
+    if (in_array($page_name, $page)) {
+        return 'active';
+    }
+}
 
 
 

@@ -51,3 +51,14 @@ form {
 .btn-red {
   color: #ff616d;
 }
+
+/* .maps {
+  frameborder: 0;
+  scrolling: no;
+  margin-height: 0;
+  margin-width: 0;
+} */
+
+.entry {
+  width: 446;
+}

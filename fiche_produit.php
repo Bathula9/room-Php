@@ -107,10 +107,11 @@ include 'inc/nav.inc.php';
         <div class="col-lg-5 col-md-12 my-auto">
             <p>
                 <?= ucfirst($produit['description']); ?> <br>
-            <div class="col">
-                <th width="446" class="entry" scope="col"><iframe width="441" height="243" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.za/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=<?php echo $googlestr; ?>&amp;aq=&amp;ie=UTF8&amp;output=embed"></iframe><br />
-            </div>
             </p>
+
+            <div class="entry"><iframe width="441" height="243" src="https://maps.google.co.za/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=<?php echo $googlestr; ?>&amp;aq=&amp;ie=UTF8&amp;output=embed"></iframe><br />
+
+            </div>
         </div>
 
     </div>
@@ -148,7 +149,7 @@ include 'inc/nav.inc.php';
     <div class="col-sm-6 mx-auto">
         <?= $msg; // affichage des messages utilisateur  
         ?>
-        <form action="" method="post" class="border mt-3 p-3 mb-4">
+        <form action="#" method="post" class="border mt-3 p-3 mb-4">
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="note" id="radio" value="5" checked>
@@ -157,26 +158,26 @@ include 'inc/nav.inc.php';
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="note" value="4" id="radio">
-                <label class="form-check-label" for="radio">
+                <input class="form-check-input" type="radio" name="note" value="4" id="radio2">
+                <label class="form-check-label" for="radio2">
                     &starf;&starf;&starf;&starf;
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="note" value="3" id="radio">
-                <label class="form-check-label" for="radio">
+                <input class="form-check-input" type="radio" name="note" value="3" id="radio3">
+                <label class="form-check-label" for="radio3">
                     &starf;&starf;&starf;
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="note" value="2" id="radio">
-                <label class="form-check-label" for="radio">
+                <input class="form-check-input" type="radio" name="note" value="2" id="radio4">
+                <label class="form-check-label" for="radio4">
                     &starf;&starf;
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="note" value="1" id="radio">
-                <label class="form-check-label" for="radio">
+                <input class="form-check-input" type="radio" name="note" value="1" id="radio5">
+                <label class="form-check-label" for="radio5">
                     &starf;
                 </label>
             </div>
