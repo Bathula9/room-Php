@@ -87,14 +87,14 @@ echo '</pre>';
         <div class="col-sm-4 mx-auto">
             <?= $msg; // affichage des messages utilisateur  
             ?>
-            <form method="post" action="" class="p-3 border mt-4 mb-4">
+            <form method="post" class="p-3 border mt-4 mb-4">
                 <div class="mb-3">
                     <label for="pseudo"><i class="fa-solid fa-user"></i> Pseudo</label>
                     <input type="text" name="pseudo" id="pseudo" class="form-control" value="" autocomplete="off">
                 </div>
                 <div class="mb-3">
                     <label for="mdp"><i class="fa-solid fa-lock"></i> Mot de passe</label>
-                    <input type="text" name="mdp" id="mdp" class="form-control" value="" autocomplete="off">
+                    <input type="password" name="mdp" id="mdp" class="form-control" value="" autocomplete="off">
                 </div>
                 <div class="mb-3">
                     <button type="submit" id="connexion" class="w-100 btn btn-outline-danger">Connexion</button>

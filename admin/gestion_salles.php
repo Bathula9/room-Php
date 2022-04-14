@@ -297,7 +297,6 @@ include '../inc/nav.inc.php';
                 <div class="mb-3">
                     <label for="capacite">Capacité</label>
                     <input type="capacite" name="capacite" id="capacite" class="form-control" value="<?= $capacite; ?>">
-                    </select>
                 </div>
 
                 <!-- categorie -->
@@ -322,9 +321,8 @@ include '../inc/nav.inc.php';
                     <button type="submit" id="enregistrement_salle" class="w-100 btn btn-outline-danger"> Enregistrer </button>
                 </div>
             </div>
+        </form>
     </div>
-    </form>
-
 </div>
 
 <div class="row mt-4">
@@ -353,7 +351,7 @@ include '../inc/nav.inc.php';
                     echo '<td>' . $ligne['id_salle'] . '</td>';
                     echo '<td>' . $ligne['titre'] . '</td>';
                     echo '<td>' . substr($ligne['description'], 0, 5) . ' <a href="#">...</a></td>';
-                    echo '<td><img src="' . URL . 'assets/img_produit/' . $ligne['photo'] . '" width="50"></td>';
+                    echo '<td><img alt = "room" src="' . URL . 'assets/img_produit/' . $ligne['photo'] . '" width="50"></td>';
                     echo '<td>' . $ligne['pays'] . '</td>';
                     echo '<td>' . $ligne['ville'] . '</td>';
                     echo '<td>' . $ligne['adresse'] . '</td>';
@@ -372,7 +370,6 @@ include '../inc/nav.inc.php';
         </table>
     </div>
 </div>
-
 
 <?php
 include '../inc/footer.inc.php';

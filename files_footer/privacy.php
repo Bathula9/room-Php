@@ -20,60 +20,50 @@ include '../inc/nav.inc.php';
     <div class="row">
         <div class="col-12 pt-3 mt-3">
             <p>
-                Thank you for visiting our website and for your interest in our
-                company and the services we offer.
+                Merci de visiter notre site Web et de l'intérêt que vous portez à notre
+                entreprise et les services que nous offrons.
             </p>
             <p>
-                For ROOM and its Affiliates, in their capacity as Data
-                Controllers, the protection of your Data is a priority. We respect
-                your privacy and ensure the protection of your personal data by
-                processing your personal data in accordance with the data protection
-                regulations, in particular Regulation 2016/679 of the European
-                Parliament and Council dated 27 April 2016 concerning the protection
-                of physical persons with regard to the processing of personal data
-                and the free circulation of this data (“GDPR”), and any national
-                legislation applicable to the protection of the Personal Data.
+                Pour ROOM et ses Affiliés, en leur qualité de Data
+                Responsables de traitement, la protection de vos Données est une priorité. Nous respectons votre vie privée et assurer la protection de vos données personnelles en traiter vos données personnelles conformément à la politique de protection des données réglementations, notamment le règlement 2016/679 du Conseil européen
+                Parlement et du Conseil du 27 avril 2016 concernant la protection
+                des personnes physiques à l'égard du traitement des données à caractère personnel
+                et la libre circulation de ces données (« RGPD»), et toute
+                législation applicable à la protection des Données Personnelles.
             </p>
 
             <p>
-                This Privacy Policy excludes those websites and online services that
-                have separate privacy policies and do not incorporate this Privacy
-                Policy by reference or otherwise.
+                Cette politique de confidentialité exclut les sites Web et les services en ligne qui ont des politiques de confidentialité distinctes et n'incorporent pas cette politique de confidentialité par référence ou autrement.
             </p>
             <p>
-                This Privacy Policy also does not apply to the collection and
-                processing of Personal Data by the owners of hotels who are third
-                parties not belonging to Oetker Collection and its Affiliates. This
-                third parties’ owners of hotels established their own Privacy Policy
-                to understand how it will treat your Personal Data. Each Privacy
-                Policy of each third-party owner of hotel is available on our
-                website.
+                Cette politique de confidentialité ne s'applique pas non plus à la collecte et
+                traitement des données personnelles par les propriétaires d'hôtels tiers
+                parties n'appartenant pas à Oetker Collection et à ses sociétés affiliées. Cette
+                les propriétaires d'hôtels tiers ont établi leur propre politique de confidentialité
+                pour comprendre comment il traitera vos données personnelles. Chaque confidentialité
+                La politique de chaque propriétaire tiers de l'hôtel est disponible sur notre
+                site Internet.
             </p>
             <p>
-                Different privacy policies also may apply to other parts of our web
-                presence, for example, web pages for online recruitment.
+                Différentes politiques de confidentialité peuvent également s'appliquer à d'autres parties de notre site Web.
+                présence, par exemple, des pages web pour le recrutement en ligne.
             </p>
             <p>
-                Our privacy practices may be more or less limited in certain
-                countries in which we operate to reflect local practices and legal
-                requirements. We will specifically inform you, if this is the case.
+                Nos pratiques de confidentialité peuvent être plus ou moins limitées dans certains
+                pays dans lesquels nous opérons pour refléter les pratiques locales et la législation
+                conditions. Nous vous informerons spécifiquement, si tel est le cas.
             </p>
             <p>
-                Parimis reserves the right to modify this Privacy Policy at any
-                time. Any modification will take effect immediately.
+                ROOM se réserve le droit de modifier cette Politique de Confidentialité à tout
+                temps. Toute modification prendra effet immédiatement.
             </p>
             <p>
-                Consequently, we invite you to regularly consult our Privacy Policy,
-                available from all pages of our website, in order to keep you
-                informed of the latest applicable online version. For the changes
-                that we consider the most significant, a notification will be made
-                on the website. We also expect you to check the date indicated on
-                this Privacy Policy in order to know the date of the last update.
-            </p>
-            <p>
-                This Privacy Policy is written in English and may be translated into
-                other languages. In the event of any inconsistency, the English
-                version shall prevail.
+                En conséquence, nous vous invitons à consulter régulièrement notre Politique de Confidentialité,
+                disponibles sur toutes les pages de notre site Internet, afin de vous
+                informé de la dernière version en ligne applicable. Pour les changements
+                que nous considérons comme les plus importants, une notification sera faite
+                sur le site Internet. Nous attendons également de vous que vous vérifiiez la date indiquée sur
+                cette politique de confidentialité afin de connaître la date de la dernière mise à jour.
             </p>
         </div>
     </div>
