@@ -296,7 +296,21 @@ include '../inc/nav.inc.php';
                 <!-- capacite -->
                 <div class="mb-3">
                     <label for="capacite">Capacité</label>
-                    <input type="capacite" name="capacite" id="capacite" class="form-control" value="<?= $capacite; ?>">
+                    <select name="capacite" id="capacite" class="form-select">
+                        <option value="10">10</option>
+
+                        <option <?php if ($capacite == '20') {
+                                    echo ' selected ';
+                                } ?>>20</option>
+
+                        <option <?php if ($capacite == '25') {
+                                    echo ' selected ';
+                                } ?>>25</option>
+
+                        <option <?php if ($capacite == '30') {
+                                    echo ' selected ';
+                                } ?>>30</option>
+                    </select>
                 </div>
 
                 <!-- categorie -->
