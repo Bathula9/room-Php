@@ -124,7 +124,7 @@ include 'inc/nav.inc.php';
         </div>
         <div class="col-4">
             <p><i class="fas fa-users"></i> Capacite : <?= $produit['capacite']; ?></p>
-            <p><i class="fas fa-folder-open"></i> Categorie : <?= $produit['categorie']; ?></p>
+            <p><i class="fas fa-folder-open"></i> <a href="index.php?categorie=<?= $produit['categorie'] ?>"><?= $produit['categorie'] ?></a></p>
         </div>
         <div class="col-4">
             <p><i class="fas fa-map-marker-alt"></i> Adresse : <?= $produit['adresse'] . ' ' . $produit['cp'] . ' ' . $produit['ville']; ?></p>
@@ -195,9 +195,13 @@ include 'inc/nav.inc.php';
 </div>
 
 <?php } else { ?>
-    <a href="inscription.php">Connectez-vous</a>
+    <div class="col d-flex justify-content-between">
+        <a href="connexion.php">Connectez-vous</a>
+        <a href="index.php">Retour vers le catalogue</a>
+    </div>
 <?php } ?>
-
+</div>
+</div>
 
 
 <?php

@@ -21,9 +21,9 @@ if (isset($_POST['pseudo']) && isset($_POST['mdp'])) {
     $mdp = trim($_POST['mdp']);
 
 
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($_POST);
+    // echo '</pre>';
 
     $connexion = $pdo->prepare("SELECT * FROM membre WHERE pseudo = :pseudo");
     $connexion->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
@@ -100,7 +100,7 @@ echo '</pre>';
                     <button type="submit" id="connexion" class="w-100 btn btn-outline-danger">Connexion</button>
                 </div>
             </form>
-
+            <p>Si vous n'avez pas encore de compte utilisateur,<a href="inscription.php"> enregistrez-vous ici.</a></p>
         </div>
     </div>
 </div>

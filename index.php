@@ -130,7 +130,7 @@ include 'inc/nav.inc.php';
                         // affichage des produits
                         while ($produit = $liste_produits->fetch(PDO::FETCH_ASSOC)) {
                             echo '<div class="col-lg-4 col-md-3 col-sm-6 mb-3">';
-                            echo '<div class="card">
+                            echo '<div class="card shadow">
                             <img src="' . URL . 'assets/img_produit/' . $produit['photo'] . '" class="card-img-top" alt="Image produit : ' . $produit['titre'] . '">
                             <div class="card-body">
                                 <h5 class="card-title d-flex justify-content-between">' . $produit['titre'] . '<span>' . $produit['prix'] . ' €' . '</span>' . '</h5>
