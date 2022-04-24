@@ -94,7 +94,7 @@ include 'inc/nav.inc.php';
 
                     ?>
                 </ul>
-                <h3 class="pb-3 border-bottom mt-3">Capacite</h3>
+                <h3 class="pb-3 border-bottom mt-3">Capacité</h3>
                 <ul class="list-group">
                     <?php
                     while ($capacite = $liste_capacite->fetch(PDO::FETCH_ASSOC)) {
@@ -104,10 +104,10 @@ include 'inc/nav.inc.php';
                     ?>
                 </ul>
 
-                <h3 class="pb-3 border-bottom mt-3">Period</h3>
+                <h3 class="pb-3 border-bottom mt-3">Périod</h3>
                 <form class="p-1">
                     <div class="mb-3">
-                        <label for="date_arrivee">Date d'arrivee</label>
+                        <label for="date_arrivee">Date d'arrivée</label>
                         <input type="datetime-local" name="date_arrivee" id="date_arrivee">
                         <button class="btn btn-sm mt-2 btn-danger">Ok</button>
                     </div>
@@ -115,7 +115,7 @@ include 'inc/nav.inc.php';
                 <form class="p-1">
 
                     <div class="mb-3">
-                        <label for="date_depart">Date de depart</label>
+                        <label for="date_depart">Date de départ</label>
                         <input type="datetime-local" name="date_depart" id="date_depart">
                         <button class="btn btn-sm mt-2 btn-danger">Ok</button>
 
