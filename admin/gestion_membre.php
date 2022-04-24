@@ -179,7 +179,7 @@ if (!empty($_SESSION['message_utilisateur'])) {
 
 <div class="row mt-4">
     <div class="col-sm-12">
-        
+
         <?php
 
         echo '<div class="table-responsive">';
